@@ -10,7 +10,13 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-        "laravel/ui": "^4.1"
+        "laravel/ui": "^4.1",
+        "roach-php/laravel": "^1.0",
+        "spatie/laravel-medialibrary": "^10.7",
+        "stancl/virtualcolumn": "^1.3",
+        "symfony/css-selector": "^6.2",
+        "symfony/dom-crawler": "^6.2",
+        "weidner/goutte": "^2.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

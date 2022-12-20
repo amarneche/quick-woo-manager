@@ -1,0 +1,12 @@
+body{
+    --bs-primary: #C00000!important;
+    --bs-primary-rgb: 192,0,0;
+    --bs-secondary: #e4536d;
+    --bs-secondary-rgb: 228,83,109;
+    --bs-success: #62a31d;
+    --bs-success-rgb: 98,163,29;
+    --bs-body-color: #252525;
+    font-family: Almarai, sans-serif;
+  }
+  
+  

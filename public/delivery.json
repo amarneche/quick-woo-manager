@@ -1,0 +1,28 @@
+{
+   
+   
+
+
+
+    "55": {
+      "duration": "3 – 6 يوم",
+      "home": 900,
+      "stopDesk": 500
+    },
+    "56": {
+      "duration": "5 – 8 يوم",
+      "home": 1300,
+      "stopDesk": "/"
+    },
+    "57": {
+      "duration": "3 – 6 يوم",
+      "home": 900,
+      "stopDesk": "/"
+    },
+    "58": {
+      "duration": "3 – 6 يوم",
+      "home": 900,
+      "stopDesk": "/"
+    }
+  }
+  

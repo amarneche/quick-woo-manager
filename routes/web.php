@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\Client\ShopController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\SafirClickController;
+use GuzzleHttp\Cookie\SetCookie;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,19 +19,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+
+Route::group(['prefix'=>'/',"as"=>'client.',"middleware"=>"web","namespace"=>"App\Http\Controllers\Client"] ,function(){
+    Route::get('/shop',[ShopController::class,'shop']);
+    Route::get('/',[ShopController::class,'home']);
+    Route::resource('products',ProductController::class);
+    Route::post('{product}/quick-order',[ShopController::class ,"quickOrder"] )->name('quick-order');
+    Route::get('/thank-you/{order?}',[ShopController::class ,"thankYou"] )->name('thank-you');
 });
 
 Auth::routes(['register'=>false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['middleware' => 'auth','as'=>'admin.', 'prefix' => 'admin' ,'namespace' => 'App\Http\Controllers'] , function(){
+Route::group(['middleware' => 'auth','as'=>'admin.', 'prefix' => 'admin' ,'namespace' => 'App\Http\Controllers\Admin'] , function(){
+    
     Route::resource('users',UserController::class);
-    Route::resource('stores',StoreController::class);
-    Route::resource('store.orders',OrderController::class);
+    Route::resource('orders',OrderController::class);
+    Route::resource('products',ProductController::class);
+    Route::post('products/storeMedia',[ProductController::class,'storeMedia'])->name('products.storeMedia');
 });
 //hook for listening on stores orders
-
-Route::post('/stores/{store}/orders/import-order/',[OrderController::class,'hookPostOrder']);
+Route::get('crowler',[SafirClickController::class,'show']);
+Route::post('crowler',[SafirClickController::class,'crowl']);
