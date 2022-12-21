@@ -15,7 +15,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders=Order::paginate(25);
+        return view('admin.orders.index',compact("orders"));
+
     }
 
     /**
@@ -48,6 +50,7 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         //
+        return view('admin.orders.show',compact('order'));
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Client\ShopController;
-use App\Http\Controllers\OrderController;
+
 use App\Http\Controllers\SafirClickController;
 use GuzzleHttp\Cookie\SetCookie;
 use Illuminate\Support\Facades\Auth;
@@ -39,7 +39,8 @@ Route::group(['middleware' => 'auth','as'=>'admin.', 'prefix' => 'admin' ,'names
     Route::resource('orders',OrderController::class);
     Route::resource('products',ProductController::class);
     Route::post('products/storeMedia',[ProductController::class,'storeMedia'])->name('products.storeMedia');
+    Route::get('crowler',[SafirClickController::class,'show'])->name('crowler.show');
+    Route::post('crowler',[SafirClickController::class,'crowl'])->name('crowler.store');
 });
 //hook for listening on stores orders
-Route::get('crowler',[SafirClickController::class,'show']);
-Route::post('crowler',[SafirClickController::class,'crowl']);
+

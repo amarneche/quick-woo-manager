@@ -3,7 +3,7 @@
 @section('content')
     <div class="content">
         <div class="card">
-            <form action="/crowler" method="post" >
+            <form action="{{route('admin.crowler.store')}}" method="post" >
                 @csrf 
                 @method('post')
                 <div class="input-group">

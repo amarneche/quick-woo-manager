@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use GuzzleHttp\Cookie\SetCookie;
 use Illuminate\Http\Request;
 use Symfony\Component\DomCrawler\Crawler;
@@ -29,20 +30,48 @@ class SafirClickController extends Controller
             $titleNode =$crawler->filterXPath('//*[@id="et_prod_title"]/bdi/text()');
             $skuNode= $crawler->filter('.et-product-page__sku span');
             $imagesNode=$crawler->filter('a.cm-image-previewer');
+            $price=$crawler->filter('span[id^="sec_discounted_price"]');
+            $minProfit=$crawler->filter('.cp-default-profit-value bdi spa');
+            $short_description=$crawler->filter('.ty-product-block__description');
+            $description=$crawler->filter('#content_description');
             
-            if($titleNode->count()>0){ 
-                // array_push($product,['title'=> $titleNode->text()]);
-              
+            if($titleNode->count()>0){                               
                 $product['title']= $titleNode->text();
             }
             if($skuNode->count()>0) {
                 $product['sku']=$skuNode->first()->text();
             }
-            $product["images"]=$imagesNode->extract(['href']);            
+            if($price->count()>0) {
+                $product['price']=$price->first()->text();
+            }
+            if($minProfit->count()>0) {
+                $product['minProfit']=$minProfit->first()->text();
+            }
+            if($short_description->count()>0) {
+                $product['short_description']= $short_description->first()->html();
+            }
+            if($description->count()>0) {
+                $product['description']= $description->first()->html();
+            }
 
-            
-            dd($product);
-        return ;
+            $product["images"]=$imagesNode->extract(['href']);   
+            $createdProduct=null; 
+            try{
+                
+            $createdProduct=Product::create($product);
+            foreach($product['images'] as $key=>$image){
+                
+                if($key==0) 
+                    $createdProduct->addMediaFromUrl($image)->toMediaCollection('featured');
+                $createdProduct->addMediaFromUrl($image)->toMediaCollection('gallery');
+            }
+
+            }
+            catch(\Exception $e){
+                if (!is_null($createdProduct)) $createdProduct->delete();
+            }
+        session()->flash('success',__("Product Imported"));
+        return redirect()->route("admin.products.index");
         }           
         else {
             session()->flash('error',"Can't login");
