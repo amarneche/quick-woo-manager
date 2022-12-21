@@ -2,6 +2,19 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-200708833-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-200708833-1');
+    </script>
+
     <meta name="direction" content="rtl">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -9,36 +22,62 @@
     <meta property="og:title" content="Binastyle -موقع التجارة الإلكترونية لكل الجزائريين">
     <meta property="og:image" content="https://binastyle.com/assets/front/img/thumbnail.png">
     <meta property="og:type" content="website">
-    <link rel="icon" type="image/png" sizes="1080x1080" href="assets/front/img/Favicon.png">
 
     <link rel="stylesheet" href="{{ asset('assets/front/bootstrap/css/bootstrap.min.css') }}">
     <link rel="manifest" href="{{ asset('manifest.json') }}">
+
     <link rel="stylesheet" href="{{ asset('assets/front/css/Cairo.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/front/css/Inter.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/front/css/slider.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/front/custom.css') }}">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.css">
+    <!-- Meta Pixel Code -->
+    <script>
+        ! function(f, b, e, v, n, t, s) {
+            if (f.fbq) return;
+            n = f.fbq = function() {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '540391184602778');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=540391184602778&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
 
 </head>
 
 <body dir="rtl">
     <!-- Start: Navbar Centered Links -->
     <nav class="navbar navbar-light navbar-expand-md sticky-top navbar-shrink py-3" id="mainNav">
-        <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span
-                    class="bs-icon-sm bs-icon-circle bs-icon-primary shadow d-flex justify-content-center align-items-center me-2 bs-icon"><svg
-                        xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                        viewBox="0 0 16 16" class="bi bi-bezier">
-                        <path fill-rule="evenodd"
-                            d="M0 10.5A1.5 1.5 0 0 1 1.5 9h1A1.5 1.5 0 0 1 4 10.5v1A1.5 1.5 0 0 1 2.5 13h-1A1.5 1.5 0 0 1 0 11.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm10.5.5A1.5 1.5 0 0 1 13.5 9h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM6 4.5A1.5 1.5 0 0 1 7.5 3h1A1.5 1.5 0 0 1 10 4.5v1A1.5 1.5 0 0 1 8.5 7h-1A1.5 1.5 0 0 1 6 5.5v-1zM7.5 4a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z">
-                        </path>
-                        <path
-                            d="M6 4.5H1.866a1 1 0 1 0 0 1h2.668A6.517 6.517 0 0 0 1.814 9H2.5c.123 0 .244.015.358.043a5.517 5.517 0 0 1 3.185-3.185A1.503 1.503 0 0 1 6 5.5v-1zm3.957 1.358A1.5 1.5 0 0 0 10 5.5v-1h4.134a1 1 0 1 1 0 1h-2.668a6.517 6.517 0 0 1 2.72 3.5H13.5c-.123 0-.243.015-.358.043a5.517 5.517 0 0 0-3.185-3.185z">
-                        </path>
-                    </svg></span><span>Binastyle</span></a><button data-bs-toggle="collapse" class="navbar-toggler"
-                data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span
-                    class="navbar-toggler-icon"></span></button>
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+
+                <span>Binastyle</span>
+            </a>
+            <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span
+                    class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon">
+
+                </span>
+            </button>
             <div class="collapse navbar-collapse" id="navcol-1">
-                <ul class="navbar-nav mx-auto"></ul><a class="btn btn-primary shadow" role="button"
-                    href="#">سلة الشراء </a>
+                <ul class="navbar-nav mx-auto"></ul>
+                <a class="btn btn-primary shadow" role="button" href="#">سلة
+                    الشراء </a>
             </div>
         </div>
     </nav><!-- End: Navbar Centered Links -->
@@ -84,10 +123,9 @@
     </footer><!-- End: Footer Multi Column -->
     <script src="{{ asset('assets/front/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/front/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="https://cdn.reflowhq.com/v2/toolkit.min.js"></script>
     <script src="{{ asset('assets/front/js/bs-init.js') }}"></script>
     <script src="{{ asset('assets/front/js/bold-and-bright.js') }}"></script>
-    @yield("scripts")
+    @yield('scripts')
 </body>
 
 </html>

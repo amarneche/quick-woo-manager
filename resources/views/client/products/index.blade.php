@@ -17,6 +17,9 @@
                         <img class="rounded img-fluid shadow w-100 fit-cover" src="{{$product->getFirstMediaUrl('gallery')}}"
                                 style="height: 250px;" /></a>
                         <div class="py-4">
+                            <div class="row">
+                                
+                            </div>
                             <span @class(["badge bg-primary mb-2" ,'text-decoration-line-through bg-secondary' =>$product->sale_price<$product->price]) >
                                  {{$product->price}} DZD  
                                  {{-- @isset($product->sale_price)
@@ -29,7 +32,7 @@
 
                             @endisset
                             <h4 class="fw-bold">{{$product->title_excerpt}}</h4>
-                            <p class="text-muted">{{$product->excerpt}}</p>
+                            <p class="text-muted">{!!$product->excerpt!!}</p>
                         </div>
                     </div>
                 </div>

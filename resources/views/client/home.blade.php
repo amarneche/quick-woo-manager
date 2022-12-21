@@ -11,32 +11,29 @@
                 </div>
             </div>
             <div class="row mx-auto">
-                @foreach($products as $product)
-                <div class="col-md-4 col-sm-12 mb-4">
-                    <div><a href="{{route('client.products.show', $product)}}">
-                        <img class="rounded img-fluid shadow w-100 fit-cover" src="{{$product->getFirstMediaUrl('gallery')}}"
-                                style="height: 250px;" /></a>
-                        <div class="py-4">
-                            <span @class(["badge bg-primary mb-2" ,'text-decoration-line-through bg-secondary' =>$product->sale_price<$product->price]) >
-                                 {{$product->price}} DZD  
-                                 {{-- @isset($product->sale_price)
-                                 <strong>{{$product->sale_price}} DZD  </strong>
-                                 @endisset --}}
-
-                            </span>
-                          @isset($product->sale_price)
-                            <span @class(["badge bg-primary mb-2" ]) > <strong>{{$product->sale_price}} DZD  </strong></span>
-
-                            @endisset
-                            <h4 class="fw-bold">{{$product->title_excerpt}}</h4>
-                            <p class="text-muted">{{$product->excerpt}}</p>
+                @foreach ($products as $product)
+                    <div class="col-md-4 col-sm-12 mb-4 p2 ">
+                        <div class="bg-white shadow rounded h-100">
+                            <a href="{{ route('client.products.show', $product) }}">
+                                <img class="rounded img-fluid shadow w-100 fit-cover"
+                                    src="{{ $product->getFirstMediaUrl('gallery') }}" style="height: 250px;" /></a>
+                            <div class="py-4 px-2">
+                                <h6 class="fw-bold">{{ $product->title }}</h6>
+                                <div class="col text-center">
+                                    <h6 class="fw-bolder   text-primary">{{ $product->price }} دج</h6>
+                                    @isset($product->sale_price)    <h6 class="text-decoration-line-through mx-2">{{ $product->sale_price }} دج</h6> @endisset
+                                </div>
+                                <div class="col text-center">
+                                    <a href="{{route('client.products.show',$product)}}" class="btn btn-primary">  أطلب الأن : {{$product->getChoosenPrice()}} دج </a>
+                                </div>
+                                {{-- <p class="text-muted">{!! $product->excerpt !!}</p> --}}
+                            </div>
                         </div>
                     </div>
-                </div>
                 @endforeach
             </div>
             <div class="row mx-auto">
-                {{$products->links()}}
+                {{ $products->links() }}
             </div>
         </div><!-- End: Team -->
 
