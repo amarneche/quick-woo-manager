@@ -9,7 +9,7 @@ use Symfony\Component\DomCrawler\Crawler;
 class SafirClickController extends Controller
 {
     public function show(){
-        return view('crowler.show');
+        return view('admin.crowler.show');
     }
 
     public function crowl(Request $request){

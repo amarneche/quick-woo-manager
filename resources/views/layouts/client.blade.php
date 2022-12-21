@@ -12,7 +12,6 @@
     <link rel="icon" type="image/png" sizes="1080x1080" href="assets/front/img/Favicon.png">
 
     <link rel="stylesheet" href="{{ asset('assets/front/bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="https://cdn.reflowhq.com/v2/toolkit.min.css">
     <link rel="manifest" href="{{ asset('manifest.json') }}">
     <link rel="stylesheet" href="{{ asset('assets/front/css/Cairo.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/front/css/Inter.css') }}">
@@ -39,7 +38,7 @@
                     class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto"></ul><a class="btn btn-primary shadow" role="button"
-                    href="signup.html">سلة الشراء </a>
+                    href="#">سلة الشراء </a>
             </div>
         </div>
     </nav><!-- End: Navbar Centered Links -->

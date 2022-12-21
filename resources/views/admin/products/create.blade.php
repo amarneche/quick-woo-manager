@@ -58,7 +58,7 @@
                                 <div class="card-body">
                                     <div class="mb-3">
                                         <label for="short_description" class="form-label">Short description</label>
-                                        <textarea class="form-control" name="short_description" id="short_description" rows="5"></textarea>
+                                        <textarea class="ckeditor form-control" name="short_description" id="short_description" rows="5"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -103,6 +103,7 @@
                         <div class="col-md-12">
                             <div class="mb-3">
                                 <label for="description" class="form-label">Description</label>
+
                                 <textarea class="form-control" name="description" id="description" rows="10"></textarea>
                             </div>
                         </div>
@@ -114,7 +115,12 @@
 @endsection
 
 @section('scripts')
-    <script>
+    <script src="{{asset("assets/plugins/ckeditor/ckeditor.js")}}" ></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            ClassicEditor.create(document.getElementById("description"));
+            ClassicEditor.create(document.getElementById("short_description"));
+        });
         var uploadedDocumentFileMap = {}
         Dropzone.options.productFeatured = {
             url: '{{ route('admin.products.storeMedia') }}',

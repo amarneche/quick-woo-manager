@@ -45,7 +45,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/home">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -63,6 +63,11 @@
             </li>
 
             <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('admin.orders.index')}}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Orders</span></a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{route('admin.products.index')}}">
                     <i class="fas fa-fw fa-table"></i>

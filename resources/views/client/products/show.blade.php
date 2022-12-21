@@ -20,7 +20,7 @@
                     </div>
                     <div class="row" dir="{{ $product->direction }}">
                         <div class="col">
-                            <p>{{ $product->short_description }} </p>
+                            <p>{!! $product->short_description !!} </p>
                         </div>
                     </div>
                     <div class="row">
