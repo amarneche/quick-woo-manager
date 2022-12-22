@@ -15,7 +15,10 @@
                     <div class="simple-slider">
                         <div class="swiper-container">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide" style="background: url('{{$product->getFirstMediaUrl('featured')}}') center center / cover no-repeat;"></div>
+
+                                <div class="swiper-slide" style="background: url('{{$product->getFirstMediaUrl('featured')}}') center center / cover no-repeat;">
+                                    
+                                </div>
                                 @foreach($product->getMedia('gallery') as $image )
                                     <div class="swiper-slide" style="background: url('{{$image->getUrl()}}') center center / cover no-repeat;"></div>
                                 @endforeach

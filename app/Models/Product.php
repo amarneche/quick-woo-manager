@@ -11,6 +11,8 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Support\Str;
+use Spatie\Image\Manipulations;
+
 class Product extends Model implements HasMedia
 {
     use HasFactory;
@@ -35,8 +37,11 @@ class Product extends Model implements HasMedia
         $this->addMediaConversion('preview')
               ->width(300)
               ->height(300)
-              ->sharpen(10);
+              ->sharpen(10)
+              
+              ->format(Manipulations::FORMAT_WEBP);
     }
+
     public function setDirection(){
        $direction =  preg_match("^[\p{Arabic}\s\p{N}]+$^",$this->title) 
         || preg_match("^[\p{Arabic}\s\p{N}]+$^",$this->description) 
