@@ -31,10 +31,10 @@ Route::group(['prefix'=>'/',"as"=>'client.',"middleware"=>"web","namespace"=>"Ap
 
 Auth::routes(['register'=>false]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => 'auth','as'=>'admin.', 'prefix' => 'admin' ,'namespace' => 'App\Http\Controllers\Admin'] , function(){
     
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');    
     Route::resource('users',UserController::class);
     Route::resource('orders',OrderController::class);
     Route::resource('products',ProductController::class);
