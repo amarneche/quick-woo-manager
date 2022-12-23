@@ -62,6 +62,9 @@ class Product extends Model implements HasMedia
         return min(array_filter([$this->price,$this->sale_price],fn ($item) => !is_null($item)));
 
     }
+    public function categories(){ 
+        return $this->hasMany(Category::class);
+    }
 
     // public static function boot() {
     //     parent::boot();
