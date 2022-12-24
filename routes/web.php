@@ -38,7 +38,7 @@ Route::group(['middleware' => 'auth','as'=>'admin.', 'prefix' => 'admin' ,'names
     Route::resource('users',UserController::class);
     Route::resource('orders',OrderController::class);
     Route::resource('products',ProductController::class);
-    Route::resource('categories',CategorieController::class);
+    Route::resource('categories',CategoryController::class);
     Route::post('products/storeMedia',[ProductController::class,'storeMedia'])->name('products.storeMedia');
     Route::get('crowler',[SafirClickController::class,'show'])->name('crowler.show');
     Route::post('crowler',[SafirClickController::class,'crowl'])->name('crowler.store');

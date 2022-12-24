@@ -51,15 +51,19 @@
                                     <td>{{ $product->price }}</td>
                                     <td>{{ $product->sale_price }}</td>
                                     <td>{{ $product->sku }}</td>
-                                    <td>
+                                    <td class=" " >
                                         <a href="{{ route('admin.products.show', $product) }}"
-                                            class="btn btn-sm btn-clean btn-circle btn-secondary"><i
+                                            class="btn btn-xs btn-clean btn-circle btn-secondary"><i
                                                 class="bi bi-eye"></i></a>
                                         <a href="{{ route('admin.products.edit', $product) }}"
-                                            class="btn btn-sm btn-clean btn-circle btn-primary"><i
+                                            class="btn btn-xs btn-clean btn-circle btn-primary"><i
                                                 class="bi bi-pencil-square"></i></a>
-                                        <a href="{{ route('admin.products.destroy', $product) }}"
-                                            class="btn btn-sm btn-clean btn-circle btn-danger"><i
+                                        <a href=""
+                                            class="btn btn-xs btn-clean btn-circle btn-danger delete-link" 
+                                            data-bs-target="#deleteModal"
+                                            data-bs-toggle="modal"
+                                            data-action="{{ route('admin.products.destroy', $product) }}"
+                                            ><i
                                                 class="bi bi-trash"></i></a>
                                     </td>
                                 </tr>
@@ -78,8 +82,11 @@
                         </tfoot>
                     </table>
                 </div>
-                {{ $products->links() }}
+               
 
+            </div>
+            <div class="card-footer">
+                {{ $products->links() }}
             </div>
         </div>
     </div>

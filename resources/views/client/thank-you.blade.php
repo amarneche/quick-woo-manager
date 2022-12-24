@@ -49,11 +49,11 @@
                         @foreach($order->items as $item)
                         <div class="col border border-1 p-0 rounded d-flex w-100">
                             <div class="flex-shrink-1 flex-nowrap">
-                                <img  class="responsive rounded m-2" width="100" src="{{$item->product->getFirstMediaUrl('featured','thumbnail')}}" />
+                                <img  class="responsive rounded m-2" width="100" src="{{$item->product_thumbnail_url}}" />
                             </div>
                             <div class="flex-grow-1 d-flex mx-2">
                                 <div class="py-2">
-                                    <h6 class="fw-bold">   {{$item->product->title}} <br /></h6>
+                                    <h6 class="fw-bold">   {{$item->product_title}} <br /></h6>
                                     <h6 class="fw-bold text-muted">   {{$item->price}} دج * {{$item->qte}} = {{$item->price *$item->qte}} دج  </h6>
                                 </div>
                             </div>

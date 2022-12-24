@@ -76,6 +76,20 @@
                     <div class="card mb-3">
                         <button type="submit" class="btn btn-primary">Edit </button>
                     </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="category" class="form-label">Categorie</label>
+                                <select class="form-select " name="category" id="category">
+                                    <option selected>Select one</option>
+                                    @foreach ($categories as $category)
+                                        
+                                        <option @if($product->categories->contains($category->id)) selected @endif value="{{ $category->id }}">{{ $category->title }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card mb-3 " id="product-featured">
                         <div class="card-body text-center shadow ">
                             <div class="mb-3">

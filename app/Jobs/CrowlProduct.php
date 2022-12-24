@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\DomCrawler\Crawler;
 
 class CrowlProduct implements ShouldQueue
@@ -16,14 +17,18 @@ class CrowlProduct implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private $url;
+    private $margin;
+    private $category;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($url)
+    public function __construct($url ,$margin,$category)
     {
         $this->url = $url;
+        $this->margin = $margin;
+        $this->category = $category;
     }
 
     /**
@@ -62,7 +67,9 @@ class CrowlProduct implements ShouldQueue
                 $product['sku']=$skuNode->first()->text();
             }
             if($price->count()>0) {
-                $product['price']=$price->first()->text();
+                $product['safir_price']=$price->first()->text();
+                $product['price']=$product['safir_price']+(2*$this->margin);
+                $product['sale_price']=$product['safir_price']+$this->margin;
             }
             if($minProfit->count()>0) {
                 $product['minProfit']=$minProfit->first()->text();
@@ -79,6 +86,7 @@ class CrowlProduct implements ShouldQueue
             try{
                 
             $createdProduct=Product::create($product);
+            $createdProduct->categories()->sync([$this->category]);
             foreach($product['images'] as $key=>$image){
                 
                 if($key==0) 
@@ -88,7 +96,9 @@ class CrowlProduct implements ShouldQueue
 
             }
             catch(\Exception $e){
+                Log::error($e);
                 if (!is_null($createdProduct)) $createdProduct->delete();
+                report($e);
             }
 
         }

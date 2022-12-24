@@ -30,6 +30,12 @@ class OrderItem extends Model
     public function product(){
         return $this->belongsTo(Product::class);
     }
+
+    public function getProductThumbnailUrlAttribute(){
+        if(!is_null($this->product)){
+            return $this->product->getFirstMediaUrl('featured','thumbnail');
+        }
+    }
     public function getSubTotalAttribute(){
         return $this->price*$this->qte;
     }

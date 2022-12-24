@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreProductRequest;
 use App\Http\Requests\Admin\UpdateProductRequest;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Wilaya;
 use App\Traits\MediaUploadingTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
@@ -33,7 +35,8 @@ class ProductController extends Controller
     public function create()
     {
         //
-        return view('admin.products.create');
+        $categories=Category::all();
+        return view('admin.products.create',compact('categories'));
     }
 
     /**
@@ -46,7 +49,10 @@ class ProductController extends Controller
     {
         //
         // dd($request);
-        $product =Product::create($request->validated());
+        $product =Product::create($request->validated());  
+        if($request->category!="")      
+        $product->categories()->sync([$request->category]);
+
         if($request->has('gallery')){
             foreach($request->file('gallery') as $image){
                $path= $image->store('public');
@@ -85,8 +91,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
-        return view('admin.products.edit',compact('product'));
+        $categories= Category::all();
+        return view('admin.products.edit',compact('product','categories'));
     }
 
     /**

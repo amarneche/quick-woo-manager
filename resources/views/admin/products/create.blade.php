@@ -43,8 +43,10 @@
                                         </div>
                                         <div class="col">
                                             <div class="mb-3">
-                                                <label class="form-label" for="sale_price"><strong> Sale   price  </strong></label>
-                                                <input id="sale_price" class="form-control" type="number"  name="sale_price" />
+                                                <label class="form-label" for="sale_price"><strong> Sale price
+                                                    </strong></label>
+                                                <input id="sale_price" class="form-control" type="number"
+                                                    name="sale_price" />
                                             </div>
                                         </div>
                                     </div>
@@ -70,13 +72,30 @@
                     <div class="card mb-3">
                         <button type="submit" class="btn btn-primary">Create </button>
                     </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="category" class="form-label">Categorie</label>
+                                <select class="form-select " name="category" id="category">
+                                    <option selected>Select one</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card mb-3 " id="product-featured">
                         <div class="card-body text-center shadow ">
+                            <div id="image-area">
+                                <img class="image responsive w-100" src="" alt="" id="featuredPreview">
+                            </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Featured image</label>
-                                <input type="file" class="form-control" name="featured" id="" accept="image/*">
+                                <input type="file" class="form-control" name="featured" id="featured" accept="image/*">
                                 <small id="helpId" class="form-text text-muted">Help text</small>
                             </div>
+                            <div id="info-area"></div>
 
                         </div>
                     </div>
@@ -115,66 +134,30 @@
 @endsection
 
 @section('scripts')
-    <script src="{{asset("assets/plugins/ckeditor/ckeditor.js")}}" ></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
+    <script src="{{ asset('assets/plugins/ckeditor/ckeditor.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
             ClassicEditor.create(document.getElementById("description"));
             ClassicEditor.create(document.getElementById("short_description"));
         });
-        var uploadedDocumentFileMap = {}
-        Dropzone.options.productFeatured = {
-            url: '{{ route('admin.products.storeMedia') }}',
-            maxFilesize: 25, // MB
-            addRemoveLinks: true,
-            headers: {
-                'X-CSRF-TOKEN': "{{ csrf_token() }}"
-            },
-            params: {
-                size: 25
-            },
-            success: function(file, response) {
-                $('form').append('<input type="hidden" name="document_file[]" value="' + response.name + '">')
-                uploadedDocumentFileMap[file.name] = response.name
-            },
-            removedfile: function(file) {
-                file.previewElement.remove()
-                var name = ''
-                if (typeof file.file_name !== 'undefined') {
-                    name = file.file_name
-                } else {
-                    name = uploadedDocumentFileMap[file.name]
-                }
-                $('form').find('input[name="document_file[]"][value="' + name + '"]').remove()
-            },
-            init: function() {
-                @if (isset($crmDocument) && $crmDocument->document_file)
-                    var files =
-                        {!! json_encode($crmDocument->document_file) !!}
-                    for (var i in files) {
-                        var file = files[i]
-                        this.options.addedfile.call(this, file)
-                        file.previewElement.classList.add('dz-complete')
-                        $('form').append('<input type="hidden" name="document_file[]" value="' + file.file_name +
-                            '">')
-                    }
-                @endif
-            },
-            error: function(file, response) {
-                if ($.type(response) === 'string') {
-                    var message = response //dropzone sends it's own error messages in string
-                } else {
-                    var message = response.errors.file
-                }
-                file.previewElement.classList.add('dz-error')
-                _ref = file.previewElement.querySelectorAll('[data-dz-errormessage]')
-                _results = []
-                for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-                    node = _ref[_i]
-                    _results.push(node.textContent = message)
-                }
+    </script>
 
-                return _results
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var featuredPreview = $('#featuredPreview');
+            $('input[name="featured"]').on("change", function() {
+                updatePreview($(this)[0].files[0]);
+            });
+
+            function updatePreview(img) {
+                // create file reader.
+                var fileReader = new FileReader();
+                fileReader.onload = function(e) {
+                    featuredPreview.attr('src', e.target.result);
+                }
+                fileReader.readAsDataURL(img);
             }
-        }
+        });
     </script>
 @endsection

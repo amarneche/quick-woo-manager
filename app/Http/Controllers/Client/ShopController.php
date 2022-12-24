@@ -28,6 +28,7 @@ class ShopController extends Controller
             'qte'=>$request->product_qty,
             'price'=>$product->getChoosenPrice(),
             'product_title'=>$product->title,
+            'sku'=>$product->sku,
         ]);
         return redirect()->route('client.thank-you',$order);
     }

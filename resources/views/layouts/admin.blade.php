@@ -61,6 +61,8 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{asset("assets/backend/sneat/js/config.js")}}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+
   </head>
 
   <body>
@@ -101,9 +103,19 @@
               </a>
 
               <ul class="menu-sub">
+                <li class="menu-item @if(str_contains( Route::currentRouteName(), 'admin.products.create')) active @endif">
+                  <a href="{{route('admin.products.create')}}" class="menu-link">
+                    <div data-i18n="Without menu">Create new</div>
+                  </a>
+                </li>
                 <li class="menu-item @if(str_contains( Route::currentRouteName(), 'admin.products.index')) active @endif">
                   <a href="{{route('admin.products.index')}}" class="menu-link">
                     <div data-i18n="Without menu">All Products</div>
+                  </a>
+                </li>
+                <li class="menu-item @if(str_contains( Route::currentRouteName(), 'admin.categories')) active @endif">
+                  <a href="{{route('admin.categories.index')}}" class="menu-link">
+                    <div data-i18n="Without navbar">Categories</div>
                   </a>
                 </li>
                 <li class="menu-item @if(str_contains( Route::currentRouteName(), 'admin.dashboard')) active @endif">
@@ -134,6 +146,12 @@
 
               </ul>
             </li>
+            <li class="menu-item @if(str_contains( Route::currentRouteName(), 'admin.crowler.show')) active @endif">
+              <a href="{{route('admin.crowler.show')}}" class="menu-link">
+                <div data-i18n="Without menu">Show Crowler</div>
+              </a>
+            </li>
+
 
 
           </ul>
@@ -324,6 +342,7 @@
 
     @yield('scripts')
     @include('layouts.parts.toasts')
+    @include('layouts.parts.delete')
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
