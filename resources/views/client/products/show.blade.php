@@ -35,8 +35,10 @@
                     </h4>
                     <div class="row my-2">
                         <div class="col">
-                            <span class="fw-bolder display-6   text-primary">{{ $product->price }} دج</span>
-                            <span class="text-decoration-line-through mx-2 display-6">{{ $product->sale_price }} دج</span>
+                            <span class="fw-bolder display-6   text-primary @isset($product->sale_price)text-decoration-line-through @endisset ">{{ $product->price }} دج</span>
+                            @isset($product->sale_price)
+                            <span class=" mx-2 display-6">{{ $product->sale_price }} دج</span>
+                            @endisset
                         </div>
                     </div>
                     <div class="row" dir="{{ $product->direction }}">

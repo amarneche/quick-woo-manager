@@ -20,11 +20,15 @@
                             <div class="py-4 px-2">
                                 <h6 class="fw-bold">{{ $product->title }}</h6>
                                 <div class="col text-center">
-                                    <h6 class="fw-bolder   text-primary">{{ $product->price }} دج</h6>
-                                    @isset($product->sale_price)    <h6 class="text-decoration-line-through mx-2">{{ $product->sale_price }} دج</h6> @endisset
+                                    <h6 class="fw-bolder   text-primary @isset($product->sale_price) text-decoration-line-through @endisset  ">
+                                        {{ $product->price }} دج</h6>
+                                    @isset($product->sale_price)
+                                        <h6 class="mx-2">{{ $product->sale_price }} دج</h6>
+                                    @endisset
                                 </div>
                                 <div class="col text-center">
-                                    <a href="{{route('client.products.show',$product)}}" class="btn btn-primary">  أطلب الأن : {{$product->getChoosenPrice()}} دج </a>
+                                    <a href="{{ route('client.products.show', $product) }}" class="btn btn-primary"> أطلب
+                                        الأن : {{ $product->getChoosenPrice() }} دج </a>
                                 </div>
                                 {{-- <p class="text-muted">{!! $product->excerpt !!}</p> --}}
                             </div>

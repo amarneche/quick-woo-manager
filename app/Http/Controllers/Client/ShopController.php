@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\StoreOrderRequest;
+use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -13,8 +14,10 @@ class ShopController extends Controller
     //
     public function home(){
 
-        $products=Product::paginate(9);
-        return view('client.home',compact('products'));
+        $products=Product::with('categories')->paginate(15);
+        $categories=Category::withCount('products')->get();
+        //will change it later.
+        return view('client.products.index',compact('products','categories'));
     }
     public function shop(){
 

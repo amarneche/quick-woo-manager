@@ -84,6 +84,7 @@
     <div class="content">
         @yield('content')
     </div>
+    @include('client.parts.offcanvas')
     <!-- Start: Footer Multi Column -->
     <footer class="bg-primary-gradient">
         <div class="container py-4 py-lg-5">
@@ -121,6 +122,7 @@
             </div>
         </div>
     </footer><!-- End: Footer Multi Column -->
+
     <script src="{{ asset('assets/front/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/front/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/front/js/bs-init.js') }}"></script>
