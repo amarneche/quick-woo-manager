@@ -1,4 +1,19 @@
 @extends('layouts.client')
+@section('head')
+<title>{{$product->title}}</title>
+<meta property="og:title" content="{{$product->title}}">
+<meta property="og:description" content="{{$product->filtered_short_description}}">
+<meta property="og:url" content="{{route('client.products.show',$product)}}">
+<meta property="og:image" content="{{$product->getFirstMediaUrl('featured')}}">
+<meta property="product:brand" content="{{$product->brand}}">
+<meta property="product:availability" content="in stock">
+<meta property="product:condition" content="new">
+<meta property="product:price:amount" content="{{$product->getChoosenPrice()}}">
+<meta property="product:price:currency" content="DZD">
+<meta property="product:retailer_item_id" content="{{$product->sku}}">
+<meta property="product:item_group_id" content="{{$product->categories->first()->title}}">
+
+@endsection
 
 @section('content')
 <style>

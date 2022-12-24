@@ -66,6 +66,9 @@ class Product extends Model implements HasMedia
         return $this->belongsToMany(Category::class,"product_category");
     }
 
+    public function getFilteredShortDescriptionAttribute(){
+         return filter_var($this->short_description,FILTER_SANITIZE_STRING);
+    }
     // public static function boot() {
     //     parent::boot();
     //     static::created(function($item){            

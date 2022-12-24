@@ -20,12 +20,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Binastyle</title>
     <meta property="og:title" content="Binastyle -موقع التجارة الإلكترونية لكل الجزائريين">
-    <meta property="og:image" content="https://binastyle.com/assets/front/img/thumbnail.png">
+    <meta property="og:image" content="{{asset("thumbnail.png")}}">
     <meta property="og:type" content="website">
+    
 
     <link rel="stylesheet" href="{{ asset('assets/front/bootstrap/css/bootstrap.min.css') }}">
     <link rel="manifest" href="{{ asset('manifest.json') }}">
-
+    <link rel="icon"  href="{{asset("favicon.jpg")}}" />
     <link rel="stylesheet" href="{{ asset('assets/front/css/Cairo.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/front/css/slider.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/front/custom.css') }}">
@@ -58,7 +59,7 @@
     <noscript><img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=540391184602778&ev=PageView&noscript=1" /></noscript>
     <!-- End Meta Pixel Code -->
-
+    @yield('head')
 </head>
 
 <body dir="rtl">
@@ -66,8 +67,7 @@
     <nav class="navbar navbar-light navbar-expand-md sticky-top navbar-shrink py-3" id="mainNav">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="/">
-
-                <span>Binastyle</span>
+                <img src="{{asset("logo.svg")}}" width="125" alt="">
             </a>
             <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span
                     class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon">
