@@ -14,14 +14,13 @@
 
         gtag('config', 'UA-200708833-1');
     </script>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://connect.facebook.net" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta name="direction" content="rtl">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Binastyle</title>
-    <meta property="og:title" content="Binastyle -موقع التجارة الإلكترونية لكل الجزائريين">
-    <meta property="og:image" content="{{asset("thumbnail.png")}}">
-    <meta property="og:type" content="website">
+
     
 
     <link rel="stylesheet" href="{{ asset('assets/front/bootstrap/css/bootstrap.min.css') }}">
@@ -60,6 +59,10 @@
             src="https://www.facebook.com/tr?id=540391184602778&ev=PageView&noscript=1" /></noscript>
     <!-- End Meta Pixel Code -->
     @yield('head')
+    <title>Binastyle</title>
+    <meta property="og:title" content="Binastyle -موقع التجارة الإلكترونية لكل الجزائريين">
+    <meta property="og:image" content="{{asset("thumbnail.png")}}">
+    <meta property="og:type" content="website">
 </head>
 
 <body dir="rtl">
