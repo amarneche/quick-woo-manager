@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div id="dataTable" class="table-responsive table mt-2" role="grid" aria-describedby="dataTable_info">
-                    <table id="dataTable" class="table my-0">
+                    <table  class="table my-0">
                         <thead>
                             <tr>
                                 <th>Image</th>

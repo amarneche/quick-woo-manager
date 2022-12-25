@@ -145,19 +145,12 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            var featuredPreview = $('#featuredPreview');
-            $('input[name="featured"]').on("change", function() {
-                updatePreview($(this)[0].files[0]);
-            });
-
-            function updatePreview(img) {
-                // create file reader.
-                var fileReader = new FileReader();
-                fileReader.onload = function(e) {
-                    featuredPreview.attr('src', e.target.result);
-                }
-                fileReader.readAsDataURL(img);
-            }
+            featured= document.getElementById("featured");
+            gallery= document.getElementById("gallery");
+            featuredPond =FilePond.create(featured);
+            galleryPond =FilePond.create(gallery);
+            galleryPond.setOptions({alllowMultiple:true});
         });
+
     </script>
 @endsection

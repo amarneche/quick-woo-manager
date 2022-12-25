@@ -54,15 +54,16 @@ class ProductController extends Controller
         $product->categories()->sync([$request->category]);
 
         if($request->has('gallery')){
-            foreach($request->file('gallery') as $image){
-               $path= $image->store('public');
+           
+            foreach($request->gallery as $imagePath){
+               
                 // $path =Storage::putFile('public',$image);
-                $product->addMedia(Storage::path($path))
+                $product->addMedia(Storage::path($imagePath))
                     ->toMediaCollection('gallery');
             }
         }
         if($request->has('featured')){
-            $path=$request->file('featured')->store('public');
+            $path=$request->featured;
             $product->addMedia(Storage::path($path))->toMediaCollection('featured');
         }
         session()->flash('success', 'Product Created Successfully');

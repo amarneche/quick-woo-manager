@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Client\ShopController;
 
 use App\Http\Controllers\SafirClickController;
@@ -42,6 +43,7 @@ Route::group(['middleware' => 'auth','as'=>'admin.', 'prefix' => 'admin' ,'names
     Route::post('products/storeMedia',[ProductController::class,'storeMedia'])->name('products.storeMedia');
     Route::get('crowler',[SafirClickController::class,'show'])->name('crowler.show');
     Route::post('crowler',[SafirClickController::class,'crowl'])->name('crowler.store');
+    Route::post('media/upload',[MediaController::class,'upload'])->name('media.upload');
 });
 //hook for listening on stores orders
 

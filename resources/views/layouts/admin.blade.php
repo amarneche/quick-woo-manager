@@ -17,7 +17,7 @@
   class="light-style layout-menu-fixed"
   dir="ltr"
   data-theme="theme-default"
-  data-assets-path="{{base_path()."/public/assets/backend/sneat/"}}"
+  data-assets-path="{{ base_path() . '/public/assets/backend/sneat/' }}"
   data-template="vertical-menu-template-free"
 >
   <head>
@@ -32,7 +32,7 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon"  href="{{asset("favicon.jpg")}}" />
+    <link rel="icon"  href="{{ asset('favicon.jpg') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -43,26 +43,31 @@
     />
 
     <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="{{asset("assets/backend/sneat/vendor/fonts/boxicons.css")}}" />
+    <link rel="stylesheet" href="{{ asset('assets/backend/sneat/vendor/fonts/boxicons.css') }}" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="{{asset("assets/backend/sneat/vendor/css/core.css")}}" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="{{asset("assets/backend/sneat/vendor/css/theme-default.css")}}" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="{{asset("assets/backend/sneat/css/demo.css")}}" />
+    <link rel="stylesheet" href="{{ asset('assets/backend/sneat/vendor/css/core.css') }}" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="{{ asset('assets/backend/sneat/vendor/css/theme-default.css') }}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="{{ asset('assets/backend/sneat/css/demo.css') }}" />
 
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+    <link
+    href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+    rel="stylesheet"/>
+    <link href="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css" rel="stylesheet"/>
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="{{asset("assets/backend/sneat/vendor/libs/perfect-scrollbar/perfect-scrollbar.css")}}" />
+    <link rel="stylesheet" href="{{ asset('assets/backend/sneat/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
 
     <!-- Page CSS -->
 
     <!-- Helpers -->
-    <script src="{{asset("assets/backend/sneat/vendor/js/helpers.js")}}"></script>
+    <script src="{{ asset('assets/backend/sneat/vendor/js/helpers.js') }}"></script>
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="{{asset("assets/backend/sneat/js/config.js")}}"></script>
+    <script src="{{ asset('assets/backend/sneat/js/config.js') }}"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
   </head>
 
   <body>
@@ -88,66 +93,66 @@
 
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
-            <li class="menu-item @if(str_contains( Route::currentRouteName(), 'admin.dashboard')) active @endif">
-              <a href="{{route('admin.dashboard')}}" class="menu-link    " >
+            <li class="menu-item @if (str_contains(Route::currentRouteName(), 'admin.dashboard')) active @endif">
+              <a href="{{ route('admin.dashboard') }}" class="menu-link    " >
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
             </li>
 
             <!-- Layouts -->
-            <li class="menu-item @if(str_contains( Route::currentRouteName(), 'admin.products')) active open @endif ">
+            <li class="menu-item @if (str_contains(Route::currentRouteName(), 'admin.products')) active open @endif ">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
                 <div data-i18n="Layouts">Products</div>
               </a>
 
               <ul class="menu-sub">
-                <li class="menu-item @if(str_contains( Route::currentRouteName(), 'admin.products.create')) active @endif">
-                  <a href="{{route('admin.products.create')}}" class="menu-link">
+                <li class="menu-item @if (str_contains(Route::currentRouteName(), 'admin.products.create')) active @endif">
+                  <a href="{{ route('admin.products.create') }}" class="menu-link">
                     <div data-i18n="Without menu">Create new</div>
                   </a>
                 </li>
-                <li class="menu-item @if(str_contains( Route::currentRouteName(), 'admin.products.index')) active @endif">
-                  <a href="{{route('admin.products.index')}}" class="menu-link">
+                <li class="menu-item @if (str_contains(Route::currentRouteName(), 'admin.products.index')) active @endif">
+                  <a href="{{ route('admin.products.index') }}" class="menu-link">
                     <div data-i18n="Without menu">All Products</div>
                   </a>
                 </li>
-                <li class="menu-item @if(str_contains( Route::currentRouteName(), 'admin.categories')) active @endif">
-                  <a href="{{route('admin.categories.index')}}" class="menu-link">
+                <li class="menu-item @if (str_contains(Route::currentRouteName(), 'admin.categories')) active @endif">
+                  <a href="{{ route('admin.categories.index') }}" class="menu-link">
                     <div data-i18n="Without navbar">Categories</div>
                   </a>
                 </li>
-                <li class="menu-item @if(str_contains( Route::currentRouteName(), 'admin.dashboard')) active @endif">
-                  <a href="{{route('admin.categories.index')}}" class="menu-link">
+                <li class="menu-item @if (str_contains(Route::currentRouteName(), 'admin.dashboard')) active @endif">
+                  <a href="{{ route('admin.categories.index') }}" class="menu-link">
                     <div data-i18n="Without navbar">Categories</div>
                   </a>
                 </li>
 
               </ul>
             </li>
-            <li class="menu-item @if(str_contains( Route::currentRouteName(), 'admin.orders')) active open @endif ">
+            <li class="menu-item @if (str_contains(Route::currentRouteName(), 'admin.orders')) active open @endif ">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
                 <div data-i18n="Layouts">Orders</div>
               </a>
 
               <ul class="menu-sub">
-                <li class="menu-item @if(str_contains( Route::currentRouteName(), 'admin.orders.index')) active @endif">
-                  <a href="{{route('admin.orders.index')}}" class="menu-link">
+                <li class="menu-item @if (str_contains(Route::currentRouteName(), 'admin.orders.index')) active @endif">
+                  <a href="{{ route('admin.orders.index') }}" class="menu-link">
                     <div data-i18n="Without menu">All Order</div>
                   </a>
                 </li>
-                <li class="menu-item @if(str_contains( Route::currentRouteName(), 'admin.dashboard')) active @endif">
-                  <a href="{{route('admin.categories.index')}}" class="menu-link">
+                <li class="menu-item @if (str_contains(Route::currentRouteName(), 'admin.dashboard')) active @endif">
+                  <a href="{{ route('admin.categories.index') }}" class="menu-link">
                     <div data-i18n="Without navbar">Shipping Wilaya</div>
                   </a>
                 </li>
 
               </ul>
             </li>
-            <li class="menu-item @if(str_contains( Route::currentRouteName(), 'admin.crowler.show')) active @endif">
-              <a href="{{route('admin.crowler.show')}}" class="menu-link">
+            <li class="menu-item @if (str_contains(Route::currentRouteName(), 'admin.crowler.show')) active @endif">
+              <a href="{{ route('admin.crowler.show') }}" class="menu-link">
                 <div data-i18n="Without menu">Show Crowler</div>
               </a>
             </li>
@@ -279,34 +284,7 @@
 
             <!-- Footer -->
             <footer class="content-footer footer bg-footer-theme">
-              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div class="mb-2 mb-md-0">
-                  ©
-                  <script>
-                      document.write(new Date().getFullYear());
-                  </script>
-                  , made with ❤️ by
-                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
-                </div>
-                <div>
-                  <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                  <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
 
-                  <a
-                    href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                    target="_blank"
-                    class="footer-link me-4"
-                    >Documentation</a
-                  >
-
-                  <a
-                    href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                    target="_blank"
-                    class="footer-link me-4"
-                    >Support</a
-                  >
-                </div>
-              </div>
             </footer>
             <!-- / Footer -->
 
@@ -320,26 +298,44 @@
       <!-- Overlay -->
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
+    @yield('modals')
     <!-- / Layout wrapper -->
 
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
-    <script src="{{asset("assets/backend/sneat/vendor/libs/jquery/jquery.js")}}"></script>
-    <script src="{{asset("assets/backend/sneat/vendor/libs/popper/popper.js")}}"></script>
-    <script src="{{asset("assets/backend/sneat/vendor/js/bootstrap.js")}}"></script>
-    <script src="{{asset("assets/backend/sneat/vendor/libs/perfect-scrollbar/perfect-scrollbar.js")}}"></script>
+    <script src="{{ asset('assets/backend/sneat/vendor/libs/jquery/jquery.js') }}"></script>
+    <script src="{{ asset('assets/backend/sneat/vendor/libs/popper/popper.js') }}"></script>
+    <script src="{{ asset('assets/backend/sneat/vendor/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('assets/backend/sneat/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
 
-    <script src="{{asset("assets/backend/sneat/vendor/js/menu.js")}}"></script>
+
+    <script src="{{ asset('assets/backend/sneat/vendor/js/menu.js') }}"></script>
     <!-- endbuild -->
 
     <!-- Vendors JS -->
 
     <!-- Main JS -->
-    <script src="{{asset("assets/backend/sneat/js/main.js")}}"></script>
-
+    <script src="{{ asset('assets/backend/sneat/js/main.js') }}"></script>
+     
     <!-- Page JS -->
-
+    <script src="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    <script>
+        // Register the plugin
+        FilePond.registerPlugin(FilePondPluginImagePreview);
+        FilePond.registerPlugin(FilePondPluginFilePoster);
+        FilePond.setOptions({
+                server:{
+                    url:"{{route('admin.media.upload')}}",
+                    headers:{
+                        "X-CSRF-TOKEN":"{{csrf_token()}}"
+                    }
+                }
+            });
+        // ... FilePond initialisation code here
+    </script>
     @yield('scripts')
     @include('layouts.parts.toasts')
     @include('layouts.parts.delete')

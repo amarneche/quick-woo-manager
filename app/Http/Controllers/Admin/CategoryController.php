@@ -44,9 +44,9 @@ class CategoryController extends Controller
             'title'=>$request->title,
             'description'=>$request->description,
         ]);
-        if($request->has(('featured'))){
-           $path= $request->file('featured')->store('public');
-           $category->addMedia(Storage::path($path))->toMediaCollection('featured');
+        if(!is_null($request->featured)){
+            $category->clearMediaCollection('featured');
+            $category->addMedia(Storage::path($request->featured))->toMediaCollection('featured');
         }
         session()->flash('success',__("Successfuly created category"));
         return redirect()->route('admin.categories.index');
@@ -84,6 +84,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+        if(!is_null($request->featured)){
+            $category->clearMediaCollection('featured');
+            $category->addMedia(Storage::path($request->featured))->toMediaCollection('featured');
+        }
+        $category->update(['title'=>$request->title ,'description'=>$request->description ]);
+        session()->flash('success','Updated Successfuly');
+        return redirect()->back();
         
     }
 

@@ -41,9 +41,15 @@
                                         <i class="bx bx-dots-vertical-rounded"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="javascript:void(0);"><i
-                                                class="bx bx-edit-alt me-2"></i>
-                                            Edit</a>
+                                        <a class="dropdown-item edit-category" href=""
+                                            data-action="{{ route('admin.categories.update', $category) }}"
+                                            data-title="{{ $category->title }}"
+                                            data-media-url="{{ $category->getFirstMediaUrl('featured') }}"
+                                            data-description="{{ $category->description }}" data-bs-toggle="offcanvas"
+                                            data-bs-target="#editCategory">
+                                            <i class="bx bx-edit-alt me-2 edit-category"></i>
+                                            Edit
+                                        </a>
                                         <a class="dropdown-item delete-link" data-bs-target="#deleteModal"
                                             data-bs-toggle="modal"
                                             data-action="{{ route('admin.categories.destroy', $category) }}"><i
@@ -62,4 +68,24 @@
         </div>
     </div>
     @include('admin.categories.create')
+    @include('admin.categories.edit-canvas')
+@endsection
+
+@section('scripts')
+    <script>
+        jQuery(document).ready(function() {
+            var featuredCreate =document.getElementById("featuredCreate");
+            var featuredEdit =document.getElementById("featuredEdit");
+
+            const pondCreate =FilePond.create(featuredCreate);
+            const pondEdit =FilePond.create(featuredEdit);
+            $('.edit-category').on('click', function() {
+                //get Data from it : and affetc it to this Form : 
+                $("#editCategoryForm").attr('action', $(this).data('action'));
+                $('#editCategoryForm input[name="title"]').val($(this).data('title'));
+                $('#editCategoryForm input[name="description"]').val($(this).data('description'));
+            });
+
+        });
+    </script>
 @endsection
