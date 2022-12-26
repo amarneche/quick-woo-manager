@@ -50,8 +50,8 @@ class ProductController extends Controller
         //
         // dd($request);
         $product =Product::create($request->validated());  
-        if($request->category!="")      
-        $product->categories()->sync([$request->category]);
+        if(Category::find($request->category))      
+            $product->categories()->sync([$request->category]);
 
         if($request->has('gallery')){
            

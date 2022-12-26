@@ -11,7 +11,7 @@
 <meta property="product:price:amount" content="{{$product->getChoosenPrice()}}">
 <meta property="product:price:currency" content="DZD">
 <meta property="product:retailer_item_id" content="{{$product->sku}}">
-<meta property="product:item_group_id" content="{{$product->categories->first()->title}}">
+{{-- <meta property="product:item_group_id" content="{{$product->main_category_title}}"> --}}
 
 @endsection
 

@@ -24,7 +24,7 @@
                         <div class="bg-white shadow rounded h-100 overflow-hidden">
 
                             <a href="{{ route('client.products.show', $product) }}">
-                                <div class="img-container" style="background-image: url('{{ $product->getFirstMediaUrl('gallery') }}'); aspect-ratio: 1; background-position: center; background-repeat: no-repeat; background-size: cover; " >
+                                <div class="img-container" style="background-image: url('{{ $product->getFirstMediaUrl('featured') }}'); aspect-ratio: 1; background-position: center; background-repeat: no-repeat; background-size: cover; " >
                                 </div>
                             </a>
                             <div class="p-4">

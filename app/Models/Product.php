@@ -6,12 +6,15 @@ use App\Traits\Sluggify;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Storage;
 use Stancl\VirtualColumn\VirtualColumn;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Support\Str;
 use Spatie\Image\Manipulations;
+use Spatie\SimpleExcel\SimpleExcelWriter;
 
 class Product extends Model implements HasMedia
 {
@@ -24,8 +27,30 @@ class Product extends Model implements HasMedia
 
     public static function getCustomColumns(){
         return[
-            'id','title','sku','slug','description','price','sale_price','short_description',
-        ];
+            "id",
+            "sku",
+            "title",
+            "slug",
+            "description",
+            "availability",
+            "condition",
+            "brand",
+            "price",
+            "short_description",
+            "product_description",
+            "sale_price",
+            "sale_price_effective_starts",
+            "sale_price_effective_ends",
+            "gender",
+            "age_group",
+            "shipping_weight",
+            "material",
+            "color",
+            "size",
+            "data",
+            "created_at",
+            "updated_at",
+                ];
     }
 
     public function registerMediaConversions(Media $media = null): void
@@ -34,12 +59,39 @@ class Product extends Model implements HasMedia
               ->width(125)
               ->height(125)
               ->sharpen(10);
+        $this->addMediaConversion('product')
+            ->width(800)
+            ->height(800)
+            ->quality(75);
+        
         $this->addMediaConversion('preview')
               ->width(300)
               ->height(300)
-              ->sharpen(10)
-              
+              ->sharpen(10)              
               ->format(Manipulations::FORMAT_WEBP);
+    }
+    public static function generateExcel(){
+        $writer= SimpleExcelWriter::create(Storage::path("public/products.xlsx"));
+        // $writer->addHeader(Schema::getColumnListing('products'));
+        $products =Product::all()->each(function(Product $product) use($writer){
+        $writer->addRow([
+            "id"=>$product->sku,
+            "title"=>$product->title,
+            "description"=>$product->description,
+            "availability"=>$product->availability,
+            "condition"=>$product->condition,
+            "price"=>$product->price,
+            "link"=>route('client.products.show', $product),
+            "image_link"=>$product->getFallbackMediaUrl('featured'),
+            "brand"=>$product->brand,
+            "sale_price"=>$product->sale_price,
+            "gender"=>$product->gender,
+            "age_group"=>$product->age_group,
+            "material"=>$product->material,
+        ]);
+        });
+        return Storage::url('products.xlsx');
+
     }
 
     public function setDirection(){
@@ -68,6 +120,12 @@ class Product extends Model implements HasMedia
 
     public function getFilteredShortDescriptionAttribute(){
          return filter_var($this->short_description,FILTER_SANITIZE_STRING);
+    }
+
+    public function getMainCategoryTitleAttribute(){
+        if($this->categories->count() > 0){ 
+            return $this->categories->first()->title;
+        }
     }
     // public static function boot() {
     //     parent::boot();

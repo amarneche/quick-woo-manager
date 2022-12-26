@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
         User::create([
             'name'=>'admin',
             'password'=>Hash::make('password'),
-            'email'=>'admin@amarneche.me',
+            'email'=>'admin@binastyle.com',
         ]);
     }
 }

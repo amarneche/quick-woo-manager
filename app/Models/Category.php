@@ -22,7 +22,16 @@ class Category extends Model implements HasMedia
     }
 
     public static function getCustomColumns(){
-        return  ['id' , 'title' ,'description' ,'slug'];
+        return  [    
+                "id",
+                "title",
+                "slug",
+                "description",
+                "parent_category",
+                "data",
+                "created_at",
+                "updated_at",
+            ];
     }
 
 }

@@ -16,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products=Product::paginate(9);
+        $products=Product::inRandomOrder()->paginate(15);
         return view('client.products.index',compact("products"));
     }
 

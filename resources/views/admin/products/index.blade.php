@@ -10,7 +10,8 @@
 
                 </div>
                 <div class="card-toolbar">
-                    <a href="{{route('admin.products.create')}}" class="btn btn-primary"> <i class="bi bi-plus"></i>Create product  </a>
+                    <a href="{{ route('admin.products.create') }}" class="btn btn-primary"> <i class="bi bi-plus"></i>Create
+                        product </a>
                 </div>
             </div>
             <div class="card-body">
@@ -32,13 +33,15 @@
                     </div>
                 </div>
                 <div id="dataTable" class="table-responsive table mt-2" role="grid" aria-describedby="dataTable_info">
-                    <table  class="table my-0">
+                    <table class="table my-0">
                         <thead>
                             <tr>
                                 <th>Image</th>
                                 <th>Title</th>
                                 <th>Price</th>
                                 <th>sale price</th>
+                                <th>Safir price</th>
+                                <th>Safir margin</th>
                                 <th>SKU </th>
                                 <th>Action</th>
                             </tr>
@@ -46,43 +49,46 @@
                         <tbody>
                             @foreach ($products as $product)
                                 <tr>
-                                    <td> <img src="{{$product->getFirstMediaUrl('featured','thumbnail')}}" width="70" class="rounded m-2"> </td>
+                                    <td> <img src="{{ $product->getFirstMediaUrl('featured', 'thumbnail') }}" width="70"
+                                            class="rounded m-2"> </td>
                                     <td>{{ $product->title_excerpt }}</td>
                                     <td>{{ $product->price }}</td>
                                     <td>{{ $product->sale_price }}</td>
+                                    <td>{{ $product->safir_price }}</td>
+                                    <td>{{ $product->minProfit }}</td>
                                     <td>{{ $product->sku }}</td>
-                                    <td class=" " >
-                                        <a href="{{ route('admin.products.show', $product) }}"
-                                            class="btn btn-xs btn-clean btn-circle btn-secondary"><i
-                                                class="bi bi-eye"></i></a>
-                                        <a href="{{ route('admin.products.edit', $product) }}"
-                                            class="btn btn-xs btn-clean btn-circle btn-primary"><i
-                                                class="bi bi-pencil-square"></i></a>
-                                        <a href=""
-                                            class="btn btn-xs btn-clean btn-circle btn-danger delete-link" 
-                                            data-bs-target="#deleteModal"
-                                            data-bs-toggle="modal"
-                                            data-action="{{ route('admin.products.destroy', $product) }}"
-                                            ><i
-                                                class="bi bi-trash"></i></a>
+                                    <td>
+                                        <div class="dropdown open">
+                                            <button class="btn btn-clean btn-icon dropdown-toggle" type="button"
+                                                id="actionId" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="actionId">
+                                                <a target="_blank" class="dropdown-item" href="{{route('client.products.show',$product)}}"><i class="bi bi-eye"></i> View</a>
+                                                <a class="dropdown-item"
+                                                    href="{{ route('admin.products.edit', $product) }}"> <i
+                                                        class="bi-pencil-square"></i> Edit
+                                                    </a>
+                                                <a class="dropdown-item delete-link"
+                                                    data-action="{{ route('admin.products.destroy', $product) }}"
+                                                    data-bs-target="#deleteModal" data-bs-toggle="modal"> 
+                                                    <i class="bi bi-trash"></i> Delete
+                                                </a>
+                                                <a target="_blank" href="{{$product->safir_link}}" class="dropdown-item">Safir link</a>
+                                                
+                                            </div>
+                                        </div>
                                     </td>
+
                                 </tr>
                             @endforeach
 
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Image</th>
-                                <th>Title</th>
-                                <th>Price</th>
-                                <th>sale price</th>
-                                <th>SKU </th>
-                                <th>Action</th>
-                            </tr>
-                        </tfoot>
+
                     </table>
                 </div>
-               
+
 
             </div>
             <div class="card-footer">

@@ -14,7 +14,7 @@ class ShopController extends Controller
     //
     public function home(){
 
-        $products=Product::with('categories')->paginate(15);
+        $products=Product::inRandomOrder()->with('categories')->paginate(15);
         $categories=Category::withCount('products')->get();
         //will change it later.
         return view('client.products.index',compact('products','categories'));

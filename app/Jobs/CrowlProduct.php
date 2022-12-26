@@ -56,7 +56,7 @@ class CrowlProduct implements ShouldQueue
             $skuNode= $crawler->filter('.et-product-page__sku span');
             $imagesNode=$crawler->filter('a.cm-image-previewer');
             $price=$crawler->filter('span[id^="sec_discounted_price"]');
-            $minProfit=$crawler->filter('.cp-default-profit-value bdi spa');
+            $minProfit=$crawler->filter('.cp-default-profit-value bdi span');
             $short_description=$crawler->filter('.ty-product-block__description');
             $description=$crawler->filter('#content_description');
             
@@ -76,12 +76,14 @@ class CrowlProduct implements ShouldQueue
             }
             if($short_description->count()>0) {
                 $product['short_description']= $short_description->first()->html();
+                $product['description']= $short_description->first()->text();
             }
             if($description->count()>0) {
-                $product['description']= $description->first()->html();
+                $product['product_description']= $description->first()->html();
             }
 
             $product["images"]=$imagesNode->extract(['href']);   
+            $product['safir_link']=$productLink;
             $createdProduct=null; 
             try{
                 
