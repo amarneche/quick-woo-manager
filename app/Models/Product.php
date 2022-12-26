@@ -71,7 +71,8 @@ class Product extends Model implements HasMedia
               ->format(Manipulations::FORMAT_WEBP);
     }
     public static function generateExcel(){
-        $writer= SimpleExcelWriter::create(Storage::path("public/products.xlsx"));
+        $path="public/products.xlsx";
+        $writer= SimpleExcelWriter::create(Storage::path($path));
         // $writer->addHeader(Schema::getColumnListing('products'));
         $products =Product::all()->each(function(Product $product) use($writer){
         $writer->addRow([
@@ -90,7 +91,7 @@ class Product extends Model implements HasMedia
             "material"=>$product->material,
         ]);
         });
-        return Storage::url('products.xlsx');
+        return $path;
 
     }
 

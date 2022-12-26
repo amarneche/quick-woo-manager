@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Wilaya;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -96,5 +97,9 @@ class ProductController extends Controller
         //
         session()->flash('failure','This Page cannot be found');
         return redirect()->route('client.products.index');
+    }
+
+    public function downloadCatalog(){
+        return Storage::download(Product::generateExcel());
     }
 }
