@@ -81,11 +81,11 @@ class Product extends Model implements HasMedia
             "description"=>$product->description,
             "availability"=>$product->availability,
             "condition"=>$product->condition,
-            "price"=>$product->price,
+            "price"=>$product->price_formatted,
             "link"=>route('client.products.show', $product),
-            "image_link"=>$product->getFallbackMediaUrl('featured'),
+            "image_link"=>$product->getFirstMediaUrl('featured'),
             "brand"=>$product->brand,
-            "sale_price"=>$product->sale_price,
+            "sale_price"=>$product->sale_price_formatted,
             "gender"=>$product->gender,
             "age_group"=>$product->age_group,
             "material"=>$product->material,
@@ -93,6 +93,16 @@ class Product extends Model implements HasMedia
         });
         return $path;
 
+    }
+    public function getPriceFormattedAttribute(){
+        return static::moneyFormat($this->price)." DZD";
+    }
+    public function getSalePriceFormattedAttribute(){
+        return static::moneyFormat($this->sale_price)." DZD";
+    }
+
+    public static function moneyFormat( $money ){
+        return number_format( $money,2,".","");
     }
 
     public function setDirection(){
