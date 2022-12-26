@@ -73,7 +73,7 @@ class Product extends Model implements HasMedia
               ->format(Manipulations::FORMAT_WEBP);
     }
     public static function generateExcel(){
-        $path="public/products.xlsx";
+        $path="public/products.csv";
         $writer= SimpleExcelWriter::create(Storage::path($path));
         // $writer->addHeader(Schema::getColumnListing('products'));
         $products =Product::all()->each(function(Product $product) use($writer){
