@@ -23,8 +23,10 @@ class Product extends Model implements HasMedia
     use Sluggify;
     use InteractsWithMedia;
     protected $guarded=[];
-
-
+    public static $availability=['in stock','out of stock',];
+    public static $condition=['new','used' , 'refurbished',];
+    public static $age_groups=['adult','all ages','infant','kids','newborn','teen','toddler'];
+    public static $gender=['male','female','unisex'];
     public static function getCustomColumns(){
         return[
             "id",

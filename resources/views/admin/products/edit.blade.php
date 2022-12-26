@@ -5,7 +5,7 @@
 
 
         <h3 class="text-dark mb-4">Edit product</h3>
-        <form action="{{ route('admin.products.update', $product) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('admin.products.update',$product) }}" method="post" enctype="multipart/form-data">
             @method('patch')
             @csrf
             <div class="row mb-3">
@@ -20,51 +20,78 @@
                                 <div class="card-body">
 
                                     <div class="row">
-                                        <div class="col">
-                                            <div class="mb-3"><label class="form-label"
-                                                    for="title"><strong>Title</strong></label>
-                                                <input id="title" value="{{ $product->title }}" class="form-control"
-                                                    type="text" placeholder="Product title" name="title" />
-                                            </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3"><label class="form-label" for="title"><strong>Title <span
+                                                            class="text-danger">*</span> </strong></label>
+                                                            <input
+                                                    id="title" class="form-control" type="text" value="{{$product->title}}"
+                                                    placeholder="Product title" name="title" /></div>
                                         </div>
-                                        <div class="col">
-                                            <div class="mb-3"><label class="form-label"
-                                                    for="sku"><strong>Sku</strong></label>
-                                                <input id="sku" value="{{ $product->sku }}" class="form-control"
-                                                    type="sku" placeholder="" name="sku" />
+                                        <div class="col-md-12">
+                                            <div class="mb-3"><label class="form-label" for="sku"><strong>Sku <span
+                                                            class="text-danger">*</span></strong></label>
+                                                            <input id="sku" class="form-control" type="sku" value="{{$product->sku}}"
+                                                    name="sku" />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            <div class="mb-3"><label class="form-label" for="price"><strong> Price
-                                                    </strong></label>
-                                                <input id="price" class="form-control" value="{{ $product->price }}"
-                                                    type="number" name="price" />
+                                            <div class="mb-3">
+                                                <label class="form-label" for="price"><strong> Price <span
+                                                            class="text-danger">*</span> </strong>
+                                                </label>
+                                                <input id="price" class="form-control" type="number" name="price" value="{{$product->price}}" />
                                             </div>
                                         </div>
                                         <div class="col">
-                                            <div class="mb-3"><label class="form-label" for="sale_price"><strong> Sale
-                                                        price
+                                            <div class="mb-3">
+                                                <label class="form-label" for="sale_price"><strong> Sale price
                                                     </strong></label>
-                                                <input id="sale_price" class="form-control"
-                                                    value="{{ $product->sale_price }}" type="number" name="sale_price" />
+                                                <input id="sale_price" class="form-control" type="number" value="{{$product->sale_price}}"
+                                                    name="sale_price" />
                                             </div>
                                         </div>
                                     </div>
 
                                 </div>
                             </div>
-                            <div class="card shadow">
+                            <div class="card shadow mb-3">
                                 <div class="card-header py-3">
                                     <p class="text-primary m-0 fw-bold">Short description</p>
                                 </div>
                                 <div class="card-body">
                                     <div class="mb-3">
                                         <label for="short_description" class="form-label">Short description</label>
-                                        <textarea class="form-control" name="short_description" id="short_description" rows="5">
-                                            {!! $product->short_description !!}
-                                        </textarea>
+                                        <textarea class="ckeditor form-control" name="short_description" id="short_description" rows="5">{!! $product->short_description !!}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card shadow mb-3">
+                                <div class="card-header py-3">
+                                    <p class="text-primary m-0 fw-bold">Facebook description</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label for="description" class="form-label">Facebook description <span
+                                                class="text-danger">*</span></label>
+                                        <textarea class="form-control" name="description" id="description" rows="5">{{$product->description}}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card shadow mb-5">
+                                <div class="card-header py-3">
+                                    <p class="text-primary m-0 fw-bold">Product Description</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label for="product_description" class="form-label">Description for product page</label>
+                
+                                                <textarea class="ckeditor form-control" name="product_description" id="product_description" rows="10"> {!!$product->product_description!!} </textarea>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -74,33 +101,71 @@
 
                 <div class="col-lg-4">
                     <div class="card mb-3">
-                        <button type="submit" class="btn btn-primary">Edit </button>
+                        <button type="submit" class="btn btn-primary">Update </button>
                     </div>
                     <div class="card mb-3">
                         <div class="card-body">
                             <div class="mb-3">
                                 <label for="category" class="form-label">Categorie</label>
                                 <select class="form-select " name="category" id="category">
-                                    <option selected>Select one</option>
+                                    
                                     @foreach ($categories as $category)
-                                        
-                                        <option @if($product->categories->contains($category->id)) selected @endif value="{{ $category->id }}">{{ $category->title }}</option>
+                                        <option value="{{ $category->id }}" @selected($product->categories->contains($category->id)) >{{ $category->title }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="availabilty" class="form-label">Availability</label>
+                                <select class="form-select " name="availabilty" id="availabilty">
+                                    @foreach(App\Models\Product::$availability as $availability)
+                                        <option value="{{$availability}}" @selected($product->availability==$availability)>{{$availability}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="condition" class="form-label">Condition</label>
+                                <select class="form-select " name="condition" id="condition">
+                                   @foreach(App\Models\Product::$condition as $condition)
+                                   <option value="{{$condition}}" @selected($product->condition==$condition)>{{$condition}}</option>
+
+                                   @endforeach
+
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="brand" class="form-label">Brand <span class="text-danger">*</span> </label>
+                                <input type="text" class="form-control" name="brand" value="{{$product->brand}}" id="brand"
+                                    aria-describedby="brandHelpID" placeholder="Brand">
+                                <small id="brandHelpID" class="form-text text-muted">Enter brand title</small>
                             </div>
                         </div>
                     </div>
                     <div class="card mb-3 " id="product-featured">
                         <div class="card-body text-center shadow ">
+                            <div id="image-area">
+                                <img class="image responsive w-100" src="{{$product->getFirstMediaUrl('featured','preview')}}" alt="" id="featuredPreview">
+                            </div>
                             <div class="mb-3">
-                                <label for="" class="form-label">Featured image</label>
-                                <input type="file" class="form-control" name="featured" id="" accept="image/*">
+                                <label for="" class="form-label">Featured image <span class="text-danger">*</span></label>
+                                <input type="file" class="form-control" name="featured" id="featured"
+                                    accept="image/*">
                                 <small id="helpId" class="form-text text-muted">Help text</small>
                             </div>
+                            <div id="info-area"></div>
 
                         </div>
                     </div>
                     <div class="card mb-3 ">
+                        <div class="row m-2">
+                            @foreach($product->getMedia('gallery')  as $media )
+                            <div class="col-md-4 border border-1 m-1 ">
+                                <a href="#" class="badge bg-primary">New!</a>
+                                <span class="position-absolute  badge badge-circle badge-primary">x</span>
+                                <img src="{{$media->getUrl()}}" class="img-fluid rounded-top" alt="">
+                            </div>
+                            @endforeach
+
+                        </div>
                         <div class="card-body text-center shadow">
                             <div class="mb-3">
                                 <label for="gallery" class="form-label">Gallery</label>
@@ -110,93 +175,64 @@
                             </div>
                         </div>
                     </div>
-
-                </div>
-
-            </div>
-            <div class="card shadow mb-5">
-                <div class="card-header py-3">
-                    <p class="text-primary m-0 fw-bold">Description</p>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <p class="text-primary m-0 fw-bold">Additional Setting </p>
+                        </div>
+                        <div class="card-body">
                             <div class="mb-3">
-                                <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control" name="description" id="description" rows="10">
-                                    {!! $product->description !!}
-                                </textarea>
+                                <label for="gender" class="form-label">Gender</label>
+                                <select class="form-select " name="gender" id="gender">
+                                    @foreach(App\Models\Product::$gender as $gender)
+                                        <option value="{{$gender}}" @selected($gender==$product->gender)> {{$gender}}   </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="age_group" class="form-label">Age group</label>
+                                <select class="form-select " name="age_group" id="age_group">
+                                    @foreach(App\Models\Product::$age_groups as $group)
+                                        <option value="{{$group}}" @selected($group==$product->age_group) >{{$group}} </option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                              <label for="materiel" class="form-label">Materiel</label>
+                              <input type="text"
+                                class="form-control" name="materiel" id="materiel" aria-describedby="helpId" placeholder="">
+                              <small id="helpId" class="form-text text-muted">Enter materiel of product</small>
                             </div>
                         </div>
                     </div>
+
                 </div>
+
             </div>
+
         </form>
     </div>
 @endsection
 
 @section('scripts')
-<script src="{{asset("assets/plugins/ckeditor/ckeditor.js")}}" ></script>
+    <script src="{{ asset('assets/plugins/ckeditor/ckeditor.js') }}"></script>
 
     <script>
         $(document).ready(function() {
-            ClassicEditor.create(document.getElementById("description"));
+            ClassicEditor.create(document.getElementById("product_description"));
             ClassicEditor.create(document.getElementById("short_description"));
         });
-        var uploadedDocumentFileMap = {}
-        Dropzone.options.productFeatured = {
-            url: '{{ route('admin.products.storeMedia') }}',
-            maxFilesize: 25, // MB
-            addRemoveLinks: true,
-            headers: {
-                'X-CSRF-TOKEN': "{{ csrf_token() }}"
-            },
-            params: {
-                size: 25
-            },
-            success: function(file, response) {
-                $('form').append('<input type="hidden" name="document_file[]" value="' + response.name + '">')
-                uploadedDocumentFileMap[file.name] = response.name
-            },
-            removedfile: function(file) {
-                file.previewElement.remove()
-                var name = ''
-                if (typeof file.file_name !== 'undefined') {
-                    name = file.file_name
-                } else {
-                    name = uploadedDocumentFileMap[file.name]
-                }
-                $('form').find('input[name="document_file[]"][value="' + name + '"]').remove()
-            },
-            init: function() {
-                @if (isset($crmDocument) && $crmDocument->document_file)
-                    var files =
-                        {!! json_encode($crmDocument->document_file) !!}
-                    for (var i in files) {
-                        var file = files[i]
-                        this.options.addedfile.call(this, file)
-                        file.previewElement.classList.add('dz-complete')
-                        $('form').append('<input type="hidden" name="document_file[]" value="' + file.file_name +
-                            '">')
-                    }
-                @endif
-            },
-            error: function(file, response) {
-                if ($.type(response) === 'string') {
-                    var message = response //dropzone sends it's own error messages in string
-                } else {
-                    var message = response.errors.file
-                }
-                file.previewElement.classList.add('dz-error')
-                _ref = file.previewElement.querySelectorAll('[data-dz-errormessage]')
-                _results = []
-                for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-                    node = _ref[_i]
-                    _results.push(node.textContent = message)
-                }
+    </script>
 
-                return _results
-            }
-        }
+    <script type="text/javascript">
+        $(document).ready(function() {
+            featured = document.getElementById("featured");
+            gallery = document.getElementById("gallery");
+            featuredPond = FilePond.create(featured);
+            galleryPond = FilePond.create(gallery);
+            galleryPond.setOptions({
+                alllowMultiple: true
+            });
+        });
     </script>
 @endsection
