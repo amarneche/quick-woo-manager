@@ -84,7 +84,7 @@ class Product extends Model implements HasMedia
         $writer->addRow([
             "id"=>$product->sku,
             "title"=>$product->title,
-            "name"=>Str::limit($product->title,50),
+            "Name"=>Str::limit($product->title,64),
             "description"=>$product->description,
             "availability"=>$product->availability,
             "condition"=>$product->condition,
