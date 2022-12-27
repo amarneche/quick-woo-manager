@@ -84,6 +84,7 @@ class Product extends Model implements HasMedia
         $writer->addRow([
             "id"=>$product->sku,
             "title"=>$product->title,
+            "name"=>Str::limit($product->title,50),
             "description"=>$product->description,
             "availability"=>$product->availability,
             "condition"=>$product->condition,
@@ -95,6 +96,7 @@ class Product extends Model implements HasMedia
             "gender"=>$product->gender,
             "age_group"=>$product->age_group,
             "material"=>$product->material,
+            "google_product_category"=>$product->main_category_title,
         ]);
         });
         return $path;
