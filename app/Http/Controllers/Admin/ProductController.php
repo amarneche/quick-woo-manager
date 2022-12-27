@@ -106,7 +106,8 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, Product $product)
     {
         //
-        $product->update($request->validated());
+
+        $product->update($request->all());
         session()->flash('success', 'Product updated successfully');
         return redirect()->back();
     }
