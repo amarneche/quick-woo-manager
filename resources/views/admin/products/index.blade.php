@@ -1,6 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
+
+
+ 
     <div class="container-fluid">
         <h3 class="text-dark mb-4">{{ __('Products') }}</h3>
         <div class="card shadow">
@@ -10,25 +13,36 @@
 
                 </div>
                 <div class="card-toolbar">
+                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#contentId" aria-expanded="false" aria-controls="contentId">
+                        Filter
+                    </a>
                     <a href="{{ route('admin.products.create') }}" class="btn btn-primary"> <i class="bi bi-plus"></i>Create
                         product </a>
                 </div>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6 text-nowrap">
-                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label
-                                class="form-label">Show <select class="d-inline-block form-select form-select-sm">
-                                    <option value="10" selected>10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select></label></div>
-                    </div>
-                    <div class="col-md-6">
-                        <div id="dataTable_filter" class="text-md-end dataTables_filter"><label class="form-label"><input
-                                    class="form-control form-control-sm" type="search" aria-controls="dataTable"
-                                    placeholder="Search" /></label>
+                <div class="collapse" id="contentId">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label for="brand" class="form-label">Brand</label>
+                                <select class="form-select form-select-sm" name="brand" id="brand">
+                                    @foreach($brands as $brand)
+                                        <option value="{{$brand}}">{{$brand}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label for="categorie_id" class="form-label">Category</label>
+                                <select class="form-select form-select-sm" name="categorie_id" id="categorie_id">
+                                    @foreach($categories as $category)
+                                        <option value="{{$category->id}}">{{$category->title}}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -38,11 +52,13 @@
                             <tr>
                                 <th>Image</th>
                                 <th>Title</th>
+                                <th>Brand</th>
                                 <th>Price</th>
                                 <th>sale price</th>
                                 <th>Safir price</th>
                                 <th>Safir margin</th>
                                 <th>SKU </th>
+                                <th>Views </th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -52,11 +68,13 @@
                                     <td> <img src="{{ $product->getFirstMediaUrl('featured', 'thumbnail') }}" width="70"
                                             class="rounded m-2"> </td>
                                     <td>{{ $product->title_excerpt }}</td>
+                                    <td>{{ $product->brand }}</td>
                                     <td>{{ $product->price }}</td>
                                     <td>{{ $product->sale_price }}</td>
                                     <td>{{ $product->safir_price }}</td>
                                     <td>{{ $product->minProfit }}</td>
                                     <td>{{ $product->sku }}</td>
+                                    <td>{{ $product->views }}</td>
                                     <td>
                                         <div class="dropdown open">
                                             <button class="btn btn-clean btn-icon dropdown-toggle" type="button"

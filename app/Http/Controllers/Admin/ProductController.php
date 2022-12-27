@@ -23,8 +23,11 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $brands=Product::select('brand')->groupBy('brand')->get()->pluck('brand');
+        $categories=Category::all();
         $products=Product::orderBy('created_at','desc')->paginate(10);
-        return view('admin.products.index' ,compact('products'));
+        return view('admin.products.index' ,compact('products','brands','categories'));
+        
     }
 
     /**

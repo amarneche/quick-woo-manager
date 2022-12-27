@@ -55,6 +55,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+        $product->incrementViews();
         $wilayas=Wilaya::all();
         return view('client.products.show', compact('product',"wilayas"));
     }

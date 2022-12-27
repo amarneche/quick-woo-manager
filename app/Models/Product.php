@@ -72,6 +72,10 @@ class Product extends Model implements HasMedia
               ->sharpen(10)              
               ->format(Manipulations::FORMAT_WEBP);
     }
+
+    public function incrementViews(){
+        $this->update(['views'=>intval($this->views)+1]);
+    }
     public static function generateExcel(){
         $path="public/products.csv";
         $writer= SimpleExcelWriter::create(Storage::path($path));
