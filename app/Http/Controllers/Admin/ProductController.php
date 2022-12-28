@@ -27,7 +27,7 @@ class ProductController extends Controller
         $categories=Category::all();
         $products=Product::orderBy('created_at','desc')->paginate(10);
         return view('admin.products.index' ,compact('products','brands','categories'));
-        
+
     }
 
     /**
@@ -109,7 +109,19 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, Product $product)
     {
         //
-
+        if(!is_null($request->featured)){
+            $product->clearMediaCollection('featured');
+            $product->addMedia(Storage::path($request->featured))->toMediaCollection('featured');
+        }
+        if($request->has('gallery')){
+           
+            foreach($request->gallery as $imagePath){
+               
+                // $path =Storage::putFile('public',$image);
+                $product->addMedia(Storage::path($imagePath))
+                    ->toMediaCollection('gallery');
+            }
+        }
         $product->update($request->all());
         session()->flash('success', 'Product updated successfully');
         return redirect()->back();
