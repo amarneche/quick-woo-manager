@@ -46,6 +46,7 @@ Route::group(['middleware' => 'auth','as'=>'admin.', 'prefix' => 'admin' ,'names
     Route::get('crowler',[SafirClickController::class,'show'])->name('crowler.show');
     Route::post('crowler',[SafirClickController::class,'crowl'])->name('crowler.store');
     Route::post('media/upload',[MediaController::class,'upload'])->name('media.upload');
+    Route::post('media/ckUpload',[MediaController::class,'upload'])->name('media.ckUpload');
 });
 //hook for listening on stores orders
 

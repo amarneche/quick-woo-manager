@@ -68,7 +68,7 @@
                     <a href="{{ route('client.categories.show', $category) }}">
                         <div class="card shadow h-100 justify-content-center">
                             <div class="card-body">
-                                <img class="rounded img-fluid w-100" src="{{ $category->getFirstMediaUrl('featured') }}" />
+                                <img class="rounded img-fluid w-100" src="{{ $category->getFirstMediaUrl('featured','preview') }}" />
                                 <h5 class="fw-bold text-center mt-3">{{ $category->title }} <span class="badge rounded-pill bg-primary"> {{$category->products->count()}} منتج</span>  </h5>
                             </div>
                         </div>
@@ -89,29 +89,32 @@
             </div>
             <div class="row mx-auto">
                 @foreach ($bestProducts as $product)
-                    <div class="col-md-4 col-sm-12 mb-4 p2 ">
-                        <div class="bg-white shadow rounded h-100">
-                            <a href="{{ route('client.products.show', $product) }}">
-                                <img class="rounded img-fluid shadow w-100 fit-cover"
-                                    src="{{ $product->getFirstMediaUrl('gallery') }}" style="height: 250px;" /></a>
-                            <div class="py-4 px-2">
-                                <h6 class="fw-bold">{{ $product->title }}</h6>
-                                <div class="col text-center">
-                                    <h6
-                                        class="fw-bolder   text-primary @isset($product->sale_price) text-decoration-line-through @endisset  ">
-                                        {{ $product->price }} دج</h6>
-                                    @isset($product->sale_price)
-                                        <h6 class="mx-2">{{ $product->sale_price }} دج</h6>
-                                    @endisset
-                                </div>
-                                <div class="col text-center">
-                                    <a href="{{ route('client.products.show', $product) }}" class="btn btn-primary"> أطلب
-                                        الأن : {{ $product->getChoosenPrice() }} دج </a>
-                                </div>
-                                {{-- <p class="text-muted">{!! $product->excerpt !!}</p> --}}
+                <div class="col-md-4 col-sm-12 mb-4 p2 ">
+                    <div class="bg-white shadow rounded h-100 overflow-hidden">
+
+                        <a href="{{ route('client.products.show', $product) }}">
+                            <div class="img-container" style="background-image: url('{{ $product->getFirstMediaUrl('featured','preview') }}'); aspect-ratio: 1; background-position: center; background-repeat: no-repeat; background-size: cover; " >
+                                @if($product->free_shipping)
+                                    <span class="badge bg-primary m-2 px-4 py-2">توصيل مجاني</span>
+                                @endif
+                            </div>
+                        </a>
+                        <div class="p-4">
+                            <h6 class="fw-bold">{{ $product->title }}</h6>
+                            <div class="col text-center">
+                                <h6 class="fw-bolder   text-primary @isset($product->sale_price) text-decoration-line-through @endisset  ">
+                                    {{ $product->price }} دج</h6>
+                                @isset($product->sale_price)
+                                    <h6 class="mx-2">{{ $product->sale_price }} دج</h6>
+                                @endisset
+                            </div>
+                            <div class="col text-center">
+                                <a href="{{ route('client.products.show', $product) }}" class="btn btn-primary"> أطلب
+                                    الأن : {{ $product->getChoosenPrice() }} دج </a>
                             </div>
                         </div>
                     </div>
+                </div>
                 @endforeach
             </div>
     </section>
@@ -127,29 +130,32 @@
             </div>
             <div class="row mx-auto">
                 @foreach ($products as $product)
-                    <div class="col-md-4 col-sm-12 mb-4 p2 ">
-                        <div class="bg-white shadow rounded h-100">
-                            <a href="{{ route('client.products.show', $product) }}">
-                                <img class="rounded img-fluid shadow w-100 fit-cover"
-                                    src="{{ $product->getFirstMediaUrl('gallery') }}" style="height: 250px;" /></a>
-                            <div class="py-4 px-2">
-                                <h6 class="fw-bold">{{ $product->title }}</h6>
-                                <div class="col text-center">
-                                    <h6
-                                        class="fw-bolder   text-primary @isset($product->sale_price) text-decoration-line-through @endisset  ">
-                                        {{ $product->price }} دج</h6>
-                                    @isset($product->sale_price)
-                                        <h6 class="mx-2">{{ $product->sale_price }} دج</h6>
-                                    @endisset
-                                </div>
-                                <div class="col text-center">
-                                    <a href="{{ route('client.products.show', $product) }}" class="btn btn-primary"> أطلب
-                                        الأن : {{ $product->getChoosenPrice() }} دج </a>
-                                </div>
-                                {{-- <p class="text-muted">{!! $product->excerpt !!}</p> --}}
+                <div class="col-md-4 col-sm-12 mb-4 p2 ">
+                    <div class="bg-white shadow rounded h-100 overflow-hidden">
+
+                        <a href="{{ route('client.products.show', $product) }}">
+                            <div class="img-container" style="background-image: url('{{ $product->getFirstMediaUrl('featured','preview') }}'); aspect-ratio: 1; background-position: center; background-repeat: no-repeat; background-size: cover; " >
+                                @if($product->free_shipping)
+                                    <span class="badge bg-primary m-2 px-4 py-2">توصيل مجاني</span>
+                                @endif
+                            </div>
+                        </a>
+                        <div class="p-4">
+                            <h6 class="fw-bold">{{ $product->title }}</h6>
+                            <div class="col text-center">
+                                <h6 class="fw-bolder   text-primary @isset($product->sale_price) text-decoration-line-through @endisset  ">
+                                    {{ $product->price }} دج</h6>
+                                @isset($product->sale_price)
+                                    <h6 class="mx-2">{{ $product->sale_price }} دج</h6>
+                                @endisset
+                            </div>
+                            <div class="col text-center">
+                                <a href="{{ route('client.products.show', $product) }}" class="btn btn-primary"> أطلب
+                                    الأن : {{ $product->getChoosenPrice() }} دج </a>
                             </div>
                         </div>
                     </div>
+                </div>
                 @endforeach
             </div>
             <div class="row mx-auto overflow-hidden">

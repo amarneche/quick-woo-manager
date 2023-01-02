@@ -24,7 +24,7 @@
                         <div class="bg-white shadow rounded h-100 overflow-hidden">
 
                             <a href="{{ route('client.products.show', $product) }}">
-                                <div class="img-container" style="background-image: url('{{ $product->getFirstMediaUrl('featured') }}'); aspect-ratio: 1; background-position: center; background-repeat: no-repeat; background-size: cover; " >
+                                <div class="img-container" style="background-image: url('{{ $product->getFirstMediaUrl('featured','preview') }}'); aspect-ratio: 1; background-position: center; background-repeat: no-repeat; background-size: cover; " >
                                     @if($product->free_shipping)
                                         <span class="badge bg-primary m-2 px-4 py-2">توصيل مجاني</span>
                                     @endif

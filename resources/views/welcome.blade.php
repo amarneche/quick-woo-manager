@@ -14,7 +14,7 @@
                 @foreach($products as $product)
                 <div class="col-md-4 col-sm-12 mb-4">
                     <div><a href="{{route('client.products.show', $product)}}">
-                        <img class="rounded img-fluid shadow w-100 fit-cover" src="{{$product->getFirstMediaUrl('gallery')}}"
+                        <img class="rounded img-fluid shadow w-100 fit-cover" src="{{$product->getFirstMediaUrl('featured','preview')}}"
                                 style="height: 250px;" /></a>
                         <div class="py-4">
                             <span @class(["badge bg-primary mb-2" ,'text-decoration-line-through bg-secondary' =>$product->sale_price<$product->price]) >

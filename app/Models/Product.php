@@ -58,19 +58,16 @@ class Product extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumbnail')
-              ->width(125)
-              ->height(125)
-              ->sharpen(10);
+             ->crop('crop-center', 150, 150);
+
         $this->addMediaConversion('product')
-            ->width(800)
-            ->height(800)
-            ->quality(75);
+            ->crop('crop-center', 800, 800)
+            ->quality(80);
         
         $this->addMediaConversion('preview')
-              ->width(300)
-              ->height(300)
-              ->sharpen(10)              
-              ->format(Manipulations::FORMAT_WEBP);
+            ->crop('crop-center', 300, 300)
+            ->format('webp')
+            ->quality(75);
     }
 
     public function incrementViews(){

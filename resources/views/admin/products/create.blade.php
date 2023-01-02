@@ -226,8 +226,14 @@
 
     <script>
         $(document).ready(function() {
-            ClassicEditor.create(document.getElementById("product_description"));
-            ClassicEditor.create(document.getElementById("short_description"));
+            let ck_config={
+                ckfinder:{
+                    uploadUrl:"{{ route('admin.media.ckUpload') }}"
+                }
+            }
+            console.log(ck_config)
+            ClassicEditor.create(document.getElementById("product_description") , ck_config);
+            ClassicEditor.create(document.getElementById("short_description") , ck_config);
         });
     </script>
 
