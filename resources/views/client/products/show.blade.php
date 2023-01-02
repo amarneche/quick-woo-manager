@@ -20,6 +20,21 @@
             max-width: 100%;
         }
     </style>
+    @auth()
+    <section>
+        <div class="row">
+            <ul class="nav justify-content-center  text-dark ">
+                <li class="nav-item">
+                    <a class="nav-link " target="_blank" href="{{route('admin.products.edit',$product)}}" aria-current="page">{{__("Edit product")}}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Views :{{$product->views}}</a>
+                </li>
+
+            </ul>
+        </div>
+    </section>
+    @endauth
     <section class="py-5">
         <!-- Start: 1 Row 2 Columns -->
         <div class="container clean-product">
