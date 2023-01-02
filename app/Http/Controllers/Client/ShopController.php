@@ -16,7 +16,8 @@ class ShopController extends Controller
 
         $products=Product::inRandomOrder()->with('categories')->paginate(20);
         $categories=Category::withCount('products')->get();
-        $bestProducts=Product::orderBy('data->views')->limit(9)->get();
+        $bestProducts=Product::where('data->views','>',0)->orderBy('data->views','desc')->limit(9)->get();
+      
         //will change it later.
         return view('client.home',compact('products','categories','bestProducts'));
     }
