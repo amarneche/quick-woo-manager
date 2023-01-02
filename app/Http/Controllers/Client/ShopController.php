@@ -15,12 +15,17 @@ class ShopController extends Controller
     public function home(){
 
         $products=Product::inRandomOrder()->with('categories')->paginate(15);
-        $categories=Category::withCount('products')->get();
+        $categories=Category::withCount('products')->limit(6)->get();
+        $bestProducts=Product::orderBy('data->views')->limit(9)->get();
         //will change it later.
-        return view('client.products.index',compact('products','categories'));
+        return view('client.home',compact('products','categories'));
     }
     public function shop(){
 
+    }
+    public function category(Category $category){
+        $category->load('products');
+        return view('client.categories.show',compact('category'));
     }
 
     public function quickOrder(StoreOrderRequest $request  ,Product $product ){

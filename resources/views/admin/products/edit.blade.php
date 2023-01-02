@@ -106,6 +106,22 @@
                     <div class="card mb-3">
                         <div class="card-body">
                             <div class="mb-3">
+                                <label for="free_shipping" class="form-label">{{__("Free Shipping")}}</label>
+                                <select class="form-select " name="free_shipping" id="free_shipping">
+                                    <option value="true" @selected($product->free_shipping==true)>Included</option>
+                                    <option value="false" @selected($product->free_shipping==false)>Not included</option>
+    
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">{{__("Exclude from catalog")}}</label>
+                                <select class="form-select " name="exclude_catalog" id="">
+                                    <option value="false" @selected($product->exclude_catalog=="false")>No</option>
+                                    <option value="true" @selected($product->exclude_catalog=="true") >Yes</option>
+
+                                </select>
+                            </div>
+                            <div class="mb-3">
                                 <label for="category" class="form-label">Categorie</label>
                                 <select class="form-select " name="category" id="category">
                                     

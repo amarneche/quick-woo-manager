@@ -4,6 +4,7 @@
 $(document).ready(function () {
     let qte =1;
     let price =    $('#quick-order').data('choosen-price');
+    console.log(price);
     let selectedWilaya= $('select[name="wilaya_id"] option:selected') ;
     let homeDeliveryRadio = $('#homeDelivery');
     let stopDeskRadio = $('#stopDesk');
@@ -55,12 +56,12 @@ $(document).ready(function () {
 
         }
 
-        choosenDeliveryCost= $('input[name="delivery"]:checked').data('cost'); 
+        choosenDeliveryCost= parseInt($('input[name="delivery"]:checked').data('cost')); 
         qte = parseInt($('input[name="product_qty"]').val());
-
+        console.log("cost :"+choosenDeliveryCost);
         total = (qte*price)+ choosenDeliveryCost;
 
-        
+        console.log(total);
         if(!isNaN(total))
             $('#total').text(total +"دج");
 

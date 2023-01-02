@@ -325,6 +325,7 @@
     <script src="{{ asset('assets/backend/sneat/js/main.js') }}"></script>
      
     <!-- Page JS -->
+    {{-- Media upload by FilePond --}}
     <script src="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.js"></script>
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
@@ -343,6 +344,7 @@
         
         // ... FilePond initialisation code here
     </script>
+    {{-- End Of media upload  --}}
     @yield('scripts')
     @include('layouts.parts.toasts')
     @include('layouts.parts.delete')

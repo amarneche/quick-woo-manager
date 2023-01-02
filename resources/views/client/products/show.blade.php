@@ -1,26 +1,25 @@
 @extends('layouts.client')
 @section('head')
-<title>{{$product->title}}</title>
-<meta property="og:title" content="{{$product->title}}">
-<meta property="og:description" content="{{$product->filtered_short_description}}">
-<meta property="og:url" content="{{route('client.products.show',$product)}}">
-<meta property="og:image" content="{{$product->getFirstMediaUrl('featured')}}">
-<meta property="product:brand" content="{{$product->brand}}">
-<meta property="product:availability" content="in stock">
-<meta property="product:condition" content="new">
-<meta property="product:price:amount" content="{{$product->getChoosenPrice()}}">
-<meta property="product:price:currency" content="DZD">
-<meta property="product:retailer_item_id" content="{{$product->sku}}">
-{{-- <meta property="product:item_group_id" content="{{$product->main_category_title}}"> --}}
-
+    <title>{{ $product->title }}</title>
+    <meta property="og:title" content="{{ $product->title }}">
+    <meta property="og:description" content="{{ $product->filtered_short_description }}">
+    <meta property="og:url" content="{{ route('client.products.show', $product) }}">
+    <meta property="og:image" content="{{ $product->getFirstMediaUrl('featured') }}">
+    <meta property="product:brand" content="{{ $product->brand }}">
+    <meta property="product:availability" content="in stock">
+    <meta property="product:condition" content="new">
+    <meta property="product:price:amount" content="{{ $product->getChoosenPrice() }}">
+    <meta property="product:price:currency" content="DZD">
+    <meta property="product:retailer_item_id" content="{{ $product->sku }}">
+    {{-- <meta property="product:item_group_id" content="{{$product->main_category_title}}"> --}}
 @endsection
 
 @section('content')
-<style>
-    .description img{
-        max-width: 100%;
-    }
-</style>
+    <style>
+        .description img {
+            max-width: 100%;
+        }
+    </style>
     <section class="py-5">
         <!-- Start: 1 Row 2 Columns -->
         <div class="container clean-product">
@@ -31,11 +30,14 @@
                         <div class="swiper-container">
                             <div class="swiper-wrapper">
 
-                                <div class="swiper-slide" style="background: url('{{$product->getFirstMediaUrl('featured')}}') center center / cover no-repeat;">
-                                    
+                                <div class="swiper-slide"
+                                    style="background: url('{{ $product->getFirstMediaUrl('featured') }}') center center / cover no-repeat;">
+
                                 </div>
-                                @foreach($product->getMedia('gallery') as $image )
-                                    <div class="swiper-slide" style="background: url('{{$image->getUrl()}}') center center / cover no-repeat;"></div>
+                                @foreach ($product->getMedia('gallery') as $image)
+                                    <div class="swiper-slide"
+                                        style="background: url('{{ $image->getUrl() }}') center center / cover no-repeat;">
+                                    </div>
                                 @endforeach
                             </div>
                             <div class="swiper-pagination"></div>
@@ -50,9 +52,11 @@
                     </h4>
                     <div class="row my-2">
                         <div class="col">
-                            <span class="fw-bolder display-6   text-primary @isset($product->sale_price)text-decoration-line-through @endisset ">{{ $product->price }} دج</span>
+                            <span
+                                class="fw-bolder display-6   text-primary @isset($product->sale_price)text-decoration-line-through @endisset ">{{ $product->price }}
+                                دج</span>
                             @isset($product->sale_price)
-                            <span class=" mx-2 display-6">{{ $product->sale_price }} دج</span>
+                                <span class=" mx-2 display-6">{{ $product->sale_price }} دج</span>
                             @endisset
                         </div>
                     </div>
@@ -67,7 +71,10 @@
                             <div class="card  bg-light border-dark border rounded-0 border-2 shadow-lg d-flex justify-content-center align-items-center mb-5 px-3 "
                                 id="order">
                                 <div class="card-body w-100 text-center">
-                                    <h2 class=" mb-4">قدم طلبك الأن</h2>
+                                    <h2 class=" mb-2">قدم طلبك الأن</h2>
+                                    @if ($product->free_shipping)
+                                        <span class="badge bg-primary mb-2 px-5 py-2">توصيل مجاني </span>
+                                    @endif
                                     <form method="post" id="quick-order"
                                         action="{{ route('client.quick-order', ['product' => $product]) }}"
                                         data-choosen-price="{{ $product->getChoosenPrice() }}">
@@ -93,8 +100,8 @@
                                                 <option value="" class="text-center">الولاية</option>
                                                 @foreach ($wilayas as $wilaya)
                                                     <option value="{{ $wilaya->id }}" data-code="{{ $wilaya->code }}"
-                                                        data-home="{{ $wilaya->delivery_home }}"
-                                                        data-stop-desk="{{ $wilaya->delivery_stopDesk }}">
+                                                        data-home="@if ($product->free_shipping) 0 @else {{ $wilaya->delivery_home }} @endif"
+                                                        data-stop-desk="@if ($product->free_shipping) 0 @else {{ $wilaya->delivery_stopDesk }} @endif">
                                                         {{ $wilaya->name }}</option>
                                                 @endforeach
                                             </select>
@@ -175,7 +182,6 @@
 
 
 @section('scripts')
-
     <script src="{{ asset('assets/front/js/quick-order.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.8/swiper-bundle.min.js"></script>
     <script src="{{ asset('assets/front/js/slider.js') }}"></script>

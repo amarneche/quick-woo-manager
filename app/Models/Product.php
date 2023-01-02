@@ -80,7 +80,8 @@ class Product extends Model implements HasMedia
         $path="public/products.csv";
         $writer= SimpleExcelWriter::create(Storage::path($path));
         // $writer->addHeader(Schema::getColumnListing('products'));
-        $products =Product::all()->each(function(Product $product) use($writer){
+        
+        $products =Product::whereIn("data->exclude_catalog",["false",false,null])->get()->each(function(Product $product) use($writer){
         $writer->addRow([
             "id"=>$product->sku,
             "title"=>$product->title,
@@ -135,6 +136,9 @@ class Product extends Model implements HasMedia
     }
     public function categories(){ 
         return $this->belongsToMany(Category::class,"product_category");
+    }
+    public function relatedProducts(){
+
     }
 
     public function getFilteredShortDescriptionAttribute(){

@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix'=>'/',"as"=>'client.',"middleware"=>"web","namespace"=>"App\Http\Controllers\Client"] ,function(){
     Route::get('/shop',[ShopController::class,'shop']);
     Route::get('/',[ShopController::class,'home']);
+    Route::get('categories/{category}',[ShopController::class,'category'])->name('categories.show');
     Route::resource('products',ProductController::class);
     Route::get('products/catalog/download',[App\Http\Controllers\Client\ProductController::class,'downloadCatalog'])->name('products.catalog.download');
     Route::post('{product}/quick-order',[ShopController::class ,"quickOrder"] )->name('quick-order');
