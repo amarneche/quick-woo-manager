@@ -14,11 +14,11 @@ class ShopController extends Controller
     //
     public function home(){
 
-        $products=Product::inRandomOrder()->with('categories')->paginate(15);
-        $categories=Category::withCount('products')->limit(6)->get();
+        $products=Product::inRandomOrder()->with('categories')->paginate(20);
+        $categories=Category::withCount('products')->get();
         $bestProducts=Product::orderBy('data->views')->limit(9)->get();
         //will change it later.
-        return view('client.home',compact('products','categories'));
+        return view('client.home',compact('products','categories','bestProducts'));
     }
     public function shop(){
 

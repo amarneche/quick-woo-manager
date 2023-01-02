@@ -48,7 +48,7 @@
                     </div>
                 @endforeach
             </div>
-            <div class="row mx-auto">
+            <div class="row mx-auto overflow-hidden">
                 {{ $products->links() }}
             </div>
         </div><!-- End: Team -->
