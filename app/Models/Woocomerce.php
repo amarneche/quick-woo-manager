@@ -123,15 +123,19 @@ class Woocomerce extends Model
             'type'=>'simple',
             'status'=>'publish',
             "catalog_visibility"=> "visible",
-            'regular_price'=>$product->price,
-            'sale_price'=>$product->sale_price,
+            'regular_price'=>strval($product->price), 
+            'sale_price'=>strval($product->sale_price),
             'description'=>$product->product_description,
             'short_description'=>$product->short_description,
             'sku'=>$product->sku,
             'images'=>$images,
         ];
-        Woocomerce::getAuth()->post('products',$productData);
+        $response=    Woocomerce::getAuth()->post('products',$productData);
+        return $response->getBody()->getContents();
         
-
+       
+    }
+    public static function addRandomProduct(){
+       return  Woocomerce::addProduct(Product::inRandomOrder()->first());
     }
 }
