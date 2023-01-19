@@ -4,6 +4,9 @@ use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Client\ShopController;
 
 use App\Http\Controllers\SafirClickController;
+use GuzzleHttp\Client;
+use GuzzleHttp\Cookie\CookieJar;
+use GuzzleHttp\Cookie\SessionCookieJar;
 use GuzzleHttp\Cookie\SetCookie;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -19,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 
 
@@ -49,4 +53,3 @@ Route::group(['middleware' => 'auth','as'=>'admin.', 'prefix' => 'admin' ,'names
     Route::post('media/ckUpload',[MediaController::class,'upload'])->name('media.ckUpload');
 });
 //hook for listening on stores orders
-

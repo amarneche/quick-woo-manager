@@ -109,4 +109,29 @@ class Woocomerce extends Model
 
         }
     }
+
+    public static function addProduct(Product $product) {
+        $images =array();
+        foreach($product->getMedia('featured') as $media){
+            array_push($images,['src'=>$media->getUrl()]);
+        }
+        foreach($product->getMedia('gallery') as $media){
+            array_push($images,['src'=>$media->getUrl()]);
+        }
+        $productData= [
+            'name'=>$product->title,
+            'type'=>'simple',
+            'status'=>'publish',
+            "catalog_visibility"=> "visible",
+            'regular_price'=>$product->price,
+            'sale_price'=>$product->sale_price,
+            'description'=>$product->product_description,
+            'short_description'=>$product->short_description,
+            'sku'=>$product->sku,
+            'images'=>$images,
+        ];
+        Woocomerce::getAuth()->post('products',$productData);
+        
+
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\Product;
+use App\Models\Woocomerce;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -95,6 +96,7 @@ class CrowlProduct implements ShouldQueue
                     $createdProduct->addMediaFromUrl($image)->toMediaCollection('featured');
                 $createdProduct->addMediaFromUrl($image)->toMediaCollection('gallery');
             }
+            Woocomerce::addProduct($createdProduct);
 
             }
             catch(\Exception $e){
