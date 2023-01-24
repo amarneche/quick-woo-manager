@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\Sluggify;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
@@ -72,6 +73,22 @@ class Product extends Model implements HasMedia
 
     public function incrementViews(){
         $this->update(['views'=>intval($this->views)+1]);
+    }
+    public static function generateSocialPostCSV(){
+        $path="public/posts.csv";
+        $writer= SimpleExcelWriter::create(Storage::path($path));
+        $products = Product::inRandomOrder()->get()->each(function(Product $product)  use($writer)  {
+            $writer->addRow([
+                'date'=>Carbon::now()->addMinutes(rand(60,60*24*7))->format('d/m/Y h:m:s'),
+                'type'=> "IMAGE",
+                'title'=>$product->title,
+                'caption'=>$product->description,
+                'is_ready'=>"TRUE",
+                'will_published_notify'=>"TRUE",
+                'media_urls'=>$product->getFirstMediaUrl('featured')
+            ]);
+        });
+        return $path;
     }
     public static function generateExcel(){
         $path="public/products.csv";
