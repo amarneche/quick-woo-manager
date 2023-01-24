@@ -103,4 +103,7 @@ class ProductController extends Controller
     public function downloadCatalog(){
         return Storage::download(Product::generateExcel());
     }
+    public function downloadPosts(){
+        return Storage::download(Product::generateSocialPostCSV());
+    }
 }

@@ -32,6 +32,7 @@ Route::group(['prefix'=>'/',"as"=>'client.',"middleware"=>"web","namespace"=>"Ap
     Route::get('categories/{category}',[ShopController::class,'category'])->name('categories.show');
     Route::resource('products',ProductController::class);
     Route::get('products/catalog/download',[App\Http\Controllers\Client\ProductController::class,'downloadCatalog'])->name('products.catalog.download');
+    Route::get('products/posts/download',[App\Http\Controllers\Client\ProductController::class,'downloadPosts'])->name('products.posts.download');
     Route::post('{product}/quick-order',[ShopController::class ,"quickOrder"] )->name('quick-order');
     Route::get('/thank-you/{order?}',[ShopController::class ,"thankYou"] )->name('thank-you');
 });

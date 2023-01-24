@@ -124,6 +124,11 @@
                     <div data-i18n="Without menu">Download catalog</div>
                   </a>
                 </li>
+                <li class="menu-item @if (str_contains(Route::currentRouteName(), 'admin.products.index')) active @endif">
+                  <a target="_blank" href="{{ route('client.products.posts.download') }}" class="menu-link">
+                    <div data-i18n="Without menu">Download Posts CSV</div>
+                  </a>
+                </li>
                 <li class="menu-item @if (str_contains(Route::currentRouteName(), 'admin.categories')) active @endif">
                   <a href="{{ route('admin.categories.index') }}" class="menu-link">
                     <div data-i18n="Without navbar">Categories</div>
