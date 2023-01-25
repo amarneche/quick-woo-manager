@@ -79,7 +79,7 @@ class Product extends Model implements HasMedia
         $writer= SimpleExcelWriter::create(Storage::path($path));
         $products = Product::inRandomOrder()->get()->each(function(Product $product)  use($writer)  {
             $writer->addRow([
-                'date'=>Carbon::now()->addMinutes(rand(60,60*24*7))->format('d/m/Y h:m:s'),
+                'date'=>Carbon::now()->addMinutes(rand(60,60*24*7))->format('Y-m-d h:m:s'),
                 'type'=> "IMAGE",
                 'title'=>$product->title,
                 'caption'=>$product->description,
