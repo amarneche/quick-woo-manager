@@ -23,6 +23,7 @@ class Order extends Model
             'order_status',
             'delivery_type',
             'delivery_cost',
+            'order_stage_id',
         ];
     }
 
@@ -51,5 +52,8 @@ class Order extends Model
             return $item->price * $item->qte;
         } );
         return $this->delivery_cost + $subTotal;
+    }
+    public function stage(){
+        return $this->belongsTo(OrderStage::class,'order_stage_id');
     }
 }
