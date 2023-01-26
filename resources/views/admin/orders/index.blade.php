@@ -44,7 +44,7 @@
                                                         {{$order->stage?->name}}
                                                     </button>
                                             <div class="dropdown-menu" aria-labelledby="triggerId">
-                                                @foreach($stages->except($order->stage->id) as $stage)
+                                                @foreach($stages->except($order->stage?->id) as $stage)
                                                     <button class="dropdown-item btn btn-sm">
                                                         {{$stage->name}}
                                                     </button>
