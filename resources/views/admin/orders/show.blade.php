@@ -48,6 +48,7 @@
                             <div class="py-2">
                                 <h6 class="fw-bold">   {{$item->product_title}} <br /></h6>
                                 <h6 class="fw-bold">   {{$item->sku}} <br /></h6>
+                                <h6 class="fw-bold"> <a target="_blank" href=" {{$item->safir_link}} " class="btn btn-primary">{{__("Safir link")}}</a> <br /></h6>
                                 <h6 class="fw-bold text-muted">   {{$item->price}} دج * {{$item->qte}} = {{$item->price *$item->qte}} دج  </h6>
                             </div>
                         </div>
