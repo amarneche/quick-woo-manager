@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderStage;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -16,7 +17,8 @@ class OrderController extends Controller
     public function index()
     {
         $orders=Order::orderBy('created_at','desc')->paginate(25);
-        return view('admin.orders.index',compact("orders"));
+        $stages = OrderStage::all();
+        return view('admin.orders.index',compact("orders" ,"stages"));
 
     }
 

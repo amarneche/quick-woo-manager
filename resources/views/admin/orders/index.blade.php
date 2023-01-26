@@ -21,6 +21,7 @@
                                 <th>commune</th>
                                 <th>Method</th>
                                 <th>Total</th>
+                                <th>{{__("Status")}}</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -33,9 +34,24 @@
                                     <td data-content="{{ $order->wilaya->name }}">{{ $order->wilaya->name }}</td>
                                     <td data-content="{{ $order->commune }}">{{ $order->commune }}</td>
                                     <td data-content="{{ $order->delivery_method_name }}">
-                                        {{ $order->delivery_method_name }}</td>
+                                        {{ $order->delivery_method_name }}
+                                    </td>
                                     <td>{{ $order->total }}</td>
-
+                                    <td>
+                                        <div class="dropdown open">
+                                            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                        {{$order->stage?->name}}
+                                                    </button>
+                                            <div class="dropdown-menu" aria-labelledby="triggerId">
+                                                @foreach($stages->except($order->stage->id) as $stage)
+                                                    <button class="dropdown-item btn btn-sm">
+                                                        {{$stage->name}}
+                                                    </button>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td>
                                         <div class="dropdown">
                                             <button class="btn btn-sm btn-primary y dropdown-toggle" type="button"
@@ -62,6 +78,9 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div class="card-footer">
+                {{$orders->links()}}
             </div>
         </div>
     </div>
