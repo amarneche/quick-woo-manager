@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Wilaya;
+use App\Services\RadaarScheduler;
 use App\Traits\MediaUploadingTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -139,5 +140,15 @@ class ProductController extends Controller
         $product->delete();
         session()->flash('success', 'Product deleted successfully');
         return redirect()->route('admin.products.index');
+    }
+
+    public function schedule(Request $request, Product $product){
+        
+        $scheduler=new RadaarScheduler($product);
+        $result =$scheduler->send(); 
+        session()->flash('success',__("Posting : ".$result ));
+        return redirect()->back();
+
+
     }
 }
