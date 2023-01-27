@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Client\ShopController;
-
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\SafirClickController;
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
@@ -45,6 +45,7 @@ Route::group(['middleware' => 'auth','as'=>'admin.', 'prefix' => 'admin' ,'names
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');    
     Route::resource('users',UserController::class);
     Route::resource('orders',OrderController::class);
+    Route::post('products/{product}/schedule',[ProductController::class ,'schedule'])->name('products.schedule');
     Route::resource('products',ProductController::class);
     Route::resource('categories',CategoryController::class);
     Route::post('products/storeMedia',[ProductController::class,'storeMedia'])->name('products.storeMedia');

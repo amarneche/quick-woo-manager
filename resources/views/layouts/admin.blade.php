@@ -309,7 +309,7 @@
       <!-- Overlay -->
       <div class="layout-overlay layout-menu-toggle"></div>
     </div>
-    @yield('modals')
+    
     <!-- / Layout wrapper -->
 
 
@@ -351,6 +351,7 @@
     </script>
     {{-- End Of media upload  --}}
     @yield('scripts')
+    @yield('modals')
     @include('layouts.parts.toasts')
     @include('layouts.parts.delete')
 

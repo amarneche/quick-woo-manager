@@ -93,6 +93,11 @@
                                                     data-bs-target="#deleteModal" data-bs-toggle="modal"> 
                                                     <i class="bi bi-trash"></i> Delete
                                                 </a>
+                                                <a  class="dropdown-item schedule" data-bs-toggle="modal" data-bs-target="#schedule-modal" 
+                                                    
+                                                    data-action="{{route('admin.products.schedule',$product)}}" >
+                                                    {{__("Share as Post")}}
+                                                </a>
                                                 <a target="_blank" href="{{$product->safir_link}}" class="dropdown-item">Safir link</a>
                                                 
                                             </div>
@@ -114,4 +119,7 @@
             </div>
         </div>
     </div>
+@endsection
+@section('modals')
+    @include('admin.modals.schedule-product')
 @endsection
