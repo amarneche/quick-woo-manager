@@ -16,6 +16,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Support\Str;
 use Spatie\Image\Manipulations;
 use Spatie\SimpleExcel\SimpleExcelWriter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class Product extends Model implements HasMedia
 {
@@ -28,6 +29,11 @@ class Product extends Model implements HasMedia
     public static $condition=['new','used' , 'refurbished',];
     public static $age_groups=['adult','all ages','infant','kids','newborn','teen','toddler'];
     public static $gender=['male','female','unisex'];
+    protected $casts =[
+        'data->views'=>'integer',
+    ];
+    protected $appends= ['views'];
+
     public static function getCustomColumns(){
         return[
             "id",
@@ -50,12 +56,20 @@ class Product extends Model implements HasMedia
             "material",
             "color",
             "size",
-            "data",
+            // "data",
             "created_at",
             "updated_at",
                 ];
     }
 
+    public static function filter(){
+        return QueryBuilder::for(Product::class)
+                ->allowedFilters(['title','brand','sku'])   
+                ->allowedIncludes(['categories'])             
+                ->defaultSort('-created_at')
+                ->allowedSorts(["data->views","created_at","price"])
+                ->paginate(10);
+            }
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumbnail')

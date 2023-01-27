@@ -22,11 +22,13 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $brands=Product::select('brand')->groupBy('brand')->get()->pluck('brand');
         $categories=Category::all();
         $products=Product::orderBy('created_at','desc')->paginate(10);
+        $products= Product::filter();
+        
         return view('admin.products.index' ,compact('products','brands','categories'));
 
     }
